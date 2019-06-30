@@ -11,7 +11,7 @@ function App() {
     <BrowserRouter>
       <div style={{display: 'flex',}}>
         <Sidenav />
-        <div style={{display: 'flex', flexDirection: 'column', width: '100%',}}>
+        <div style={{display: 'flex', flexDirection: 'column', maxWidth: 'calc(100% - 240px)', minWidth: 'calc(100% - 240px)',}}>
         <Header />
         <Routes />
         </div>
