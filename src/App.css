@@ -1,7 +1,7 @@
 .nav {
   height: 50px;
   background: whitesmoke;
-  box-shadow: 0 1px 5px 5px rgba(0, 0, 0, 0.2)
+  box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.1)
 }
 
 .nav .link-wrap {
@@ -13,7 +13,37 @@
 
 .nav .link-wrap a {
   text-decoration: none;
-  font-size: 20px;
+  font-size: 18px;
   margin: 0 20px;
   color: #555;
+}
+
+.sidenav {
+  min-width: 240px;
+  top: 0;
+  flex: 1 0 auto;
+  min-height: 100vh;
+  height: auto;
+  display: flex;
+  outline: none;
+  z-index: 1200;
+  position: relative;
+  overflow-y: auto;
+  flex-direction: column;
+}
+
+.sidenav a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #555;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+}
+
+.logo img {
+  height: 60px;
+  width: auto;
 }
