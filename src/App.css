@@ -48,3 +48,16 @@
   height: 60px;
   width: auto;
 }
+
+.book-style {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 200px;
+  width: 150px;
+  margin: 20px;
+}
+
+.book-style h3, .book-style p{
+  margin: 8px 0 0 0;
+}
