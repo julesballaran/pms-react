@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import axios from 'axios'
 import {
   Paper,
   Modal,
@@ -11,17 +12,6 @@ import {
 }
   from '@material-ui/core/';
 import Book from '@material-ui/icons/Book';
-
-const modalStyle = {
-  display: 'flex',
-  justifyContent: 'space-around',
-  flexDirection: 'column',
-  alignItems: 'center',
-  background: 'white',
-  outline: 'none',
-  height: 300,
-  width: 350,
-}
 
 const btnStyle = {
   width: 150,
@@ -40,11 +30,33 @@ export default function Books(){
   const [type, setType] = useState('')
   const [bookName, setBookName] = useState('')
   const [bookNo, setBookNo] = useState('')
+  const [bookList, setBookList] = useState([])
   
+  useEffect(
+    () => {
+      axios
+        .get('http://localhost:9090/books')
+        .then(res => setBookList(res.data))
+    }, []
+  ) 
+
+  function handleSubmit(e){
+    e.preventDefault()
+    if(type){
+      axios
+        .post('http://localhost:9090/books', {
+          bookName,
+          bookNo,
+          type,
+        })
+        .then(window.location.reload())
+    }
+  }
+
   return (
     <React.Fragment>
       <Button 
-        style={btnStyle} 
+        style={btnStyle}
         onClick={() => setOpen(true)}
       >Add Book
       </Button>
@@ -54,57 +66,58 @@ export default function Books(){
         justify="flex-start"
         alignItems="flex-start"
       >
-      <Paper className='book-style'>
-        <Book style={{fontSize: 120,}}/>
-        <h3>Book 1</h3>
-        <p>200 entries</p>
-      </Paper>
-      <Paper className='book-style'></Paper>
-      <Paper className='book-style'></Paper>
-      <Paper className='book-style'></Paper>
-      <Paper className='book-style'></Paper>
+        {bookList.map(book => (
+          <Paper className='book-style' key={book.id}>
+            <Book style={{fontSize: 120,}}/>
+            <h3>{book.bookName}</h3>
+            <p>{book.type}</p>
+            <p>200 entries</p>
+          </Paper>
+        ))}
       </Grid>
 
       <Modal 
         open={open}
         onClose={() => setOpen(false)}
         style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
-      > 
-        <div style={modalStyle}>
-          <TextField
-            style={{width: '90%'}}
-            required
-            label="Book Name"
-            value={bookName}
-            margin="normal"
-            onChange={e => setBookName(e.target.value)}
-          />
-          <TextField
-            style={{width: '90%'}}
-            required
-            label="Book Number"
-            type="number"
-            value={bookNo}
-            margin="normal"
-            onChange={e => setBookNo(e.target.value)}
-          />
-          <InputLabel style={{width: '90%'}}>Type: 
-            <Select
-              style={{width: '100%'}}
-              value={type}
-              onChange={e => setType(e.target.value)}
-              label="type"
-            >
-              <MenuItem style={{minWidth: '90%'}} value='Baptismal'>Baptismal</MenuItem>
-              <MenuItem style={{minWidth: '90%'}} value='Confirmation'>Confirmation</MenuItem>
-              <MenuItem style={{minWidth: '90%'}} value='Death'>Death</MenuItem>
-              <MenuItem style={{minWidth: '90%'}} value='Marriage'>Marriage</MenuItem>
-            </Select>
-          </InputLabel>
-          <Button variant="contained">
-            ADD
-          </Button>
-        </div>
+      >
+        <form onSubmit={e => handleSubmit(e)}>
+          <div className="modal-style">
+            <TextField
+              style={{width: '90%'}}
+              required
+              label="Book Name"
+              value={bookName}
+              margin="normal"
+              onChange={e => setBookName(e.target.value)}
+            />
+            <TextField
+              style={{width: '90%'}}
+              required
+              label="Book Number"
+              type="number"
+              value={bookNo}
+              margin="normal"
+              onChange={e => setBookNo(e.target.value)}
+            />
+            <InputLabel style={{width: '90%'}}>Type: 
+              <Select
+                style={{width: '100%'}}
+                value={type}
+                onChange={e => setType(e.target.value)}
+                label="type"
+              >
+                <MenuItem style={{minWidth: '90%'}} value='Baptismal'>Baptismal</MenuItem>
+                <MenuItem style={{minWidth: '90%'}} value='Confirmation'>Confirmation</MenuItem>
+                <MenuItem style={{minWidth: '90%'}} value='Death'>Death</MenuItem>
+                <MenuItem style={{minWidth: '90%'}} value='Marriage'>Marriage</MenuItem>
+              </Select>
+            </InputLabel>
+            <Button variant="contained" type="submit">
+              ADD
+            </Button>
+          </div>
+        </form>
       </Modal>
     </React.Fragment>
   )

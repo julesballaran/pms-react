@@ -49,6 +49,17 @@
   width: auto;
 }
 
+.modal-style {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  outline: none;
+  height: 300px;
+  width: 350px;
+}
+
 .book-style {
   display: flex;
   align-items: center;
@@ -59,5 +70,5 @@
 }
 
 .book-style h3, .book-style p{
-  margin: 8px 0 0 0;
+  margin: 0;
 }
