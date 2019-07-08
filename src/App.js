@@ -9,7 +9,7 @@ import Routes from './routes'
 function App() {
   return (
     <BrowserRouter>
-      <div style={{display: 'flex', backgroundImage: `url(${background})`}}>
+      <div style={{display: 'flex', backgroundImage: `url(${background})`, backgroundSize: 'cover'}}>
         <Sidenav />
         <div style={{display: 'flex', flexDirection: 'column', maxWidth: 'calc(100% - 240px)', minWidth: 'calc(100% - 240px)',}}>
         <Header />
