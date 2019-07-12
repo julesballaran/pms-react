@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react'
+import { makeStyles } from '@material-ui/styles'
 import axios from 'axios'
 import {
   Paper,
   Modal,
+  Dialog,
   Select,
   MenuItem,
   InputLabel,
@@ -13,19 +15,27 @@ import {
   from '@material-ui/core/';
 import Book from '@material-ui/icons/Book';
 
-const btnStyle = {
-  width: 150,
-  height: 35,
-  display: 'flex',
-  margin: '15px 10px 0 auto',
-  fontSize: 15,
-  fontWeight: 'bolder',
-  border: '1px solid black',
-}
+const useStyles = makeStyles({
+  btnStyle: {
+    width: 150,
+    height: 35,
+    display: 'flex',
+    margin: '15px 10px 0 auto',
+    fontSize: 15,
+    fontWeight: 'bolder',
+    border: '1px solid black',
+  },
+  addBtn: {
+    width: 100,
+    fontWeight: 'bolder',
+    border: '1px solid black',
+  }
+})
 
 
 export default function Books(){
 
+  const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [type, setType] = useState('')
   const [bookName, setBookName] = useState('')
@@ -34,11 +44,15 @@ export default function Books(){
   
   useEffect(
     () => {
-      axios
-        .get('http://localhost:9090/books')
-        .then(res => setBookList(res.data))
+      fetchData()
     }, []
   ) 
+
+  const fetchData = () => {
+    axios
+      .get('http://localhost:9090/books')
+      .then(res => setBookList(res.data))
+  }
 
   function handleSubmit(e){
     e.preventDefault()
@@ -49,14 +63,18 @@ export default function Books(){
           bookNo,
           type,
         })
-        .then(window.location.reload())
+        .then(()=>{
+            setOpen(false)
+            fetchData()
+          }
+        )
     }
   }
 
   return (
     <React.Fragment>
       <Button 
-        style={btnStyle}
+        className={classes.btnStyle}
         onClick={() => setOpen(true)}
       >Add Book
       </Button>
@@ -76,10 +94,9 @@ export default function Books(){
         ))}
       </Grid>
 
-      <Modal 
+      <Dialog 
         open={open}
         onClose={() => setOpen(false)}
-        style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
       >
         <form onSubmit={e => handleSubmit(e)}>
           <div className="modal-style">
@@ -113,12 +130,12 @@ export default function Books(){
                 <MenuItem style={{minWidth: '90%'}} value='Marriage'>Marriage</MenuItem>
               </Select>
             </InputLabel>
-            <Button variant="contained" type="submit">
+            <Button variant="contained" type="submit" className={classes.addBtn}>
               ADD
             </Button>
           </div>
         </form>
-      </Modal>
+      </Dialog>
     </React.Fragment>
   )
 }
