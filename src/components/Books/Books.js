@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     width: 150,
     height: 35,
     display: 'flex',
-    margin: '15px 10px 0 auto',
+    margin: '15px 10px 0 10px',
     fontSize: 15,
     fontWeight: 'bolder',
     border: '1px solid black',
@@ -41,6 +41,9 @@ export default function Books(){
   const [bookName, setBookName] = useState('')
   const [bookNo, setBookNo] = useState('')
   const [bookList, setBookList] = useState([])
+  const [removeOpen, setRemoveOpen] = useState(false)
+  const [removeBookList, setRemoveBookList] = useState([]) 
+  const [removeBook, setRemoveBook] = useState('') 
   
   useEffect(
     () => {
@@ -71,13 +74,34 @@ export default function Books(){
     }
   }
 
+  const removeDataBook = () => {
+    axios
+      .delete(`http://localhost:9090/books/${removeBook}`)
+      .then(()=>{
+        setRemoveOpen(false)
+        fetchData()
+      })
+  }
+
+  const setTypeRemove = val => {
+    setType(val)
+    setRemoveBookList(bookList.filter(book=>book.type === val))
+  }
+
   return (
     <React.Fragment>
-      <Button 
-        className={classes.btnStyle}
-        onClick={() => setOpen(true)}
-      >Add Book
-      </Button>
+      <Grid container wrap='nowrap' justify='flex-end'>
+        <Button 
+          className={classes.btnStyle}
+          onClick={() => setOpen(true)}
+        >Add Book
+        </Button>
+        <Button 
+          className={classes.btnStyle}
+          onClick={() => setRemoveOpen(true)}
+        >Remove Book
+        </Button>
+      </Grid>
       <Grid
         container
         direction="row"
@@ -93,7 +117,41 @@ export default function Books(){
           </Paper>
         ))}
       </Grid>
-
+      <Dialog
+        open={removeOpen}
+        onClose={()=>setRemoveOpen(false)}
+      >
+        <div className="modal-style">
+          <InputLabel style={{width: '80%'}}>Type: 
+            <Select
+              style={{width: '100%'}}
+              value={type}
+              onChange={e => setTypeRemove(e.target.value)}
+              label="type"
+            >
+              <MenuItem style={{minWidth: '80%'}} value='Baptismal'>Baptismal</MenuItem>
+              <MenuItem style={{minWidth: '80%'}} value='Confirmation'>Confirmation</MenuItem>
+              <MenuItem style={{minWidth: '80%'}} value='Death'>Death</MenuItem>
+              <MenuItem style={{minWidth: '80%'}} value='Marriage'>Marriage</MenuItem>
+            </Select>
+          </InputLabel>
+          <InputLabel style={{width: '80%'}}>Book: 
+            <Select
+              style={{width: '100%'}}
+              value={removeBook}
+              onChange={e => setRemoveBook(e.target.value)}
+              label="type"
+            >
+              {removeBookList.map(book=>(
+                <MenuItem key={book.id} style={{minWidth: '80%'}} value={book.id}>{book.bookName}</MenuItem>
+              ))}
+            </Select>
+          </InputLabel>
+          <Button variant="contained" className={classes.addBtn} onClick={removeDataBook}>
+            REMOVE
+          </Button>
+        </div>
+      </Dialog>
       <Dialog 
         open={open}
         onClose={() => setOpen(false)}
@@ -101,7 +159,7 @@ export default function Books(){
         <form onSubmit={e => handleSubmit(e)}>
           <div className="modal-style">
             <TextField
-              style={{width: '90%'}}
+              style={{width: '80%'}}
               required
               label="Book Name"
               value={bookName}
@@ -109,7 +167,7 @@ export default function Books(){
               onChange={e => setBookName(e.target.value)}
             />
             <TextField
-              style={{width: '90%'}}
+              style={{width: '80%'}}
               required
               label="Book Number"
               type="number"
@@ -117,17 +175,17 @@ export default function Books(){
               margin="normal"
               onChange={e => setBookNo(e.target.value)}
             />
-            <InputLabel style={{width: '90%'}}>Type: 
+            <InputLabel style={{width: '80%'}}>Type: 
               <Select
                 style={{width: '100%'}}
                 value={type}
                 onChange={e => setType(e.target.value)}
                 label="type"
               >
-                <MenuItem style={{minWidth: '90%'}} value='Baptismal'>Baptismal</MenuItem>
-                <MenuItem style={{minWidth: '90%'}} value='Confirmation'>Confirmation</MenuItem>
-                <MenuItem style={{minWidth: '90%'}} value='Death'>Death</MenuItem>
-                <MenuItem style={{minWidth: '90%'}} value='Marriage'>Marriage</MenuItem>
+                <MenuItem style={{minWidth: '80%'}} value='Baptismal'>Baptismal</MenuItem>
+                <MenuItem style={{minWidth: '80%'}} value='Confirmation'>Confirmation</MenuItem>
+                <MenuItem style={{minWidth: '80%'}} value='Death'>Death</MenuItem>
+                <MenuItem style={{minWidth: '80%'}} value='Marriage'>Marriage</MenuItem>
               </Select>
             </InputLabel>
             <Button variant="contained" type="submit" className={classes.addBtn}>
