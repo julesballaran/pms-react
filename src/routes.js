@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import Baptismal from './components/Records/Baptismal'
@@ -9,14 +9,41 @@ import Books from './components/Books/Books'
 import Manage from './components/Manage/Manage'
 
 
-export default function Routes() {
+export default function Routes(props) {
+  const { baptismal, confirmation, loaded } = props
   return (
     <Switch>
       <Route path='/baptismal' component={Baptismal}/>
-      <Route path='/confirmation' component={Confirmation}/>
+      <Route exact path='/confirmation/' 
+        render={(props) => 
+          <Confirmation  
+            {...props} 
+            confirmation={confirmation} 
+            loaded={loaded}
+          />
+        }
+      />
+      <Route path='/confirmation/:no' 
+        render={(props) => 
+          <Confirmation  
+            {...props} 
+            confirmation={confirmation} 
+            loaded={loaded}
+          />
+        }
+      />
       <Route path='/death' component={Death}/>
       <Route path='/marriage' component={Marriage}/>
-      <Route path='/books' component={Books}/>
+      <Route path='/books' 
+        render={(props)=>
+          <Books 
+            {...props}
+            baptismal={baptismal}
+            confirmation={confirmation} 
+            loaded={loaded}
+          />
+        }
+      />
       <Route path='/manage' component={Manage}/>
     </Switch>
   )

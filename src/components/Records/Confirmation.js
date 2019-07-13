@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import MaterialTable from 'material-table';
 
 const styleCell = {
@@ -6,8 +6,9 @@ const styleCell = {
   width: 10,
 }
 
-export default function Confirmation() {
-  const [state, setState] = React.useState({
+export default function Confirmation(props) {
+  const { confirmation, loaded } = props
+  const [state, setState] = useState({
     columns: [
       { title: 'Book', field: 'book', cellStyle: {styleCell}},
       { title: 'Page', field: 'page', cellStyle: {styleCell}},
@@ -16,29 +17,27 @@ export default function Confirmation() {
       { title: 'Father', field: 'father', cellStyle: {styleCell}},
       { title: 'Mother', field: 'mother', cellStyle: {styleCell}},
       { title: 'Birth Date', field: 'birthdate', cellStyle: {styleCell}},
-      { title: 'Confirmation Date', field: 'confirmationdate', cellStyle: {styleCell}},
+      { title: 'Confirmation Date', field: 'date', cellStyle: {styleCell}},
     ],
-    data: [
-      { book: 1, page: 100, no: 10, name: 'asdaasdasdasdasdasdasdas', father: 'asdasdas', mother: 'asdasdas', birthdate: '2485485', confirmationdate: 'a555456'},
-    ],
-  });
+    data: confirmation
+  })
+
+  useEffect(()=>{
+    if(!loaded){
+      props.history.push('/');
+    } else {
+      if(props.match.params.no){
+        setState({...state, ...{data: confirmation.filter(c => c.book === props.match.params.no)}})
+      }
+    }
+  }, [])
 
   return (
     <MaterialTable
       title="Confirmation"
       columns={state.columns}
       data={state.data}
-      editable={{
-        onRowUpdate: (newData, oldData) =>
-          new Promise(resolve => {
-            setTimeout(() => {
-              resolve();
-              const data = [...state.data];
-              data[data.indexOf(oldData)] = newData;
-              setState({ ...state, data });
-            }, 600);
-          }),
-      }}
+      onRowClick={(e, rowData)=> console.log(rowData)}
     />
-  );
+  )
 }

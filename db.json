@@ -3,20 +3,56 @@
     {
       "bookName": "Book 1",
       "bookNo": "1",
-      "type": "Baptismal",
+      "type": "baptismal",
       "id": 1
     },
     {
       "bookName": "Book 2",
       "bookNo": "2",
-      "type": "Confirmation",
+      "type": "confirmation",
       "id": 2
     },
     {
       "bookName": "Book 3",
       "bookNo": "3",
-      "type": "Baptismal",
+      "type": "baptismal",
       "id": 3
+    }
+  ],
+  "baptismal": [
+    {
+      "id": 1,
+      "book": "1",
+      "type": "baptismal",
+      "page": 1,
+      "no": 1,
+      "name": "b"
+    }
+  ],
+  "confirmation": [
+    {
+      "id": 1,
+      "book": "2",
+      "type": "confirmation",
+      "page": 1,
+      "no": 1,
+      "name": "c",
+      "father": "f",
+      "mother": "m",
+      "birthdate": "asdasd",
+      "date": "asdasd"
+    },
+    {
+      "id": 2,
+      "book": "3",
+      "type": "confirmation",
+      "page": 1,
+      "no": 1,
+      "name": "c",
+      "father": "f",
+      "mother": "m",
+      "birthdate": "asdasd",
+      "date": "asdasd"
     }
   ]
 }

@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/styles'
 import axios from 'axios'
 import {
   Paper,
-  Modal,
   Dialog,
   Select,
   MenuItem,
@@ -11,9 +10,10 @@ import {
   TextField,
   Button,
   Grid,
-}
-  from '@material-ui/core/';
-import Book from '@material-ui/icons/Book';
+} from '@material-ui/core/';
+
+
+import DisplayBooks from './components/DisplayBooks'
 
 const useStyles = makeStyles({
   btnStyle: {
@@ -33,8 +33,8 @@ const useStyles = makeStyles({
 })
 
 
-export default function Books(){
-
+export default function Books(props){
+  const { confirmation, baptismal, loaded } = props
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [type, setType] = useState('')
@@ -45,11 +45,14 @@ export default function Books(){
   const [removeBookList, setRemoveBookList] = useState([]) 
   const [removeBook, setRemoveBook] = useState('') 
   
-  useEffect(
-    () => {
-      fetchData()
-    }, []
-  ) 
+  useEffect(() => {
+      if(!loaded){
+        props.history.push('/');
+      } else {
+        fetchData()
+      }
+    }, []) 
+
 
   const fetchData = () => {
     axios
@@ -102,21 +105,11 @@ export default function Books(){
         >Remove Book
         </Button>
       </Grid>
-      <Grid
-        container
-        direction="row"
-        justify="flex-start"
-        alignItems="flex-start"
-      >
-        {bookList.map(book => (
-          <Paper className='book-style' key={book.id}>
-            <Book style={{fontSize: 120,}}/>
-            <h3>{book.bookName}</h3>
-            <p>{book.type}</p>
-            <p>200 entries</p>
-          </Paper>
-        ))}
-      </Grid>
+      <DisplayBooks 
+        bookList={bookList}
+        confirmation={confirmation}
+        baptismal={baptismal}
+      />
       <Dialog
         open={removeOpen}
         onClose={()=>setRemoveOpen(false)}

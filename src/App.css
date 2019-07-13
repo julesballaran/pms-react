@@ -64,11 +64,11 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 200px;
+  height: 180px;
   width: 150px;
   margin: 20px;
 }
 
-.book-style h3, .book-style p{
+.book-style h4, .book-style p{
   margin: 0;
 }
