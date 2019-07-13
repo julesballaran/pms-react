@@ -7,7 +7,7 @@ const styleCell = {
 }
 
 export default function Baptismal(props){
-  const { baptismal, loaded } = props
+  const { baptismal, confirmation } = props
   const [state, setState] = useState({
     columns: [
       { title: 'Book', field: 'book', cellStyle: {styleCell}},
@@ -17,24 +17,16 @@ export default function Baptismal(props){
       { title: 'Father', field: 'father', cellStyle: {styleCell}},
       { title: 'Mother', field: 'mother', cellStyle: {styleCell}},
       { title: 'Birth Date', field: 'birthdate', cellStyle: {styleCell}},
-      { title: 'Baptismal Date', field: 'date', cellStyle: {styleCell}},
+      { title: 'Date', field: 'date', cellStyle: {styleCell}},
+      { title: 'Type', field: 'type', cellStyle: {styleCell}},
     ],
-    data: baptismal
+    data: [...baptismal, ...confirmation]
   })
 
-  useEffect(()=>{
-    if(!loaded){
-      props.history.push('/');
-    } else {
-      if(props.match.params.no){
-        setState({...state, ...{data: baptismal.filter(c => c.book === props.match.params.no)}})
-      }
-    }
-  }, [])
 
   return (
     <MaterialTable
-      title="Baptismal"
+      title="All Records"
       columns={state.columns}
       data={state.data}
       onRowClick={(e, rowData)=> console.log(rowData)}
