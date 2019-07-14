@@ -8,7 +8,7 @@ const styleCell = {
 
 export default function Baptismal(props){
   const { baptismal, confirmation } = props
-  const [state, setState] = useState({
+  const [state] = useState({
     columns: [
       { title: 'Book', field: 'book', cellStyle: {styleCell}},
       { title: 'Page', field: 'page', cellStyle: {styleCell}},

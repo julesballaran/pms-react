@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import { makeStyles } from '@material-ui/styles'
 import axios from 'axios'
 import {
-  Paper,
   Dialog,
   Select,
   MenuItem,
@@ -122,10 +121,10 @@ export default function Books(props){
               onChange={e => setTypeRemove(e.target.value)}
               label="type"
             >
-              <MenuItem style={{minWidth: '80%'}} value='Baptismal'>Baptismal</MenuItem>
-              <MenuItem style={{minWidth: '80%'}} value='Confirmation'>Confirmation</MenuItem>
-              <MenuItem style={{minWidth: '80%'}} value='Death'>Death</MenuItem>
-              <MenuItem style={{minWidth: '80%'}} value='Marriage'>Marriage</MenuItem>
+              <MenuItem style={{minWidth: '80%'}} value='baptismal'>Baptismal</MenuItem>
+              <MenuItem style={{minWidth: '80%'}} value='confirmation'>Confirmation</MenuItem>
+              <MenuItem style={{minWidth: '80%'}} value='death'>Death</MenuItem>
+              <MenuItem style={{minWidth: '80%'}} value='marriage'>Marriage</MenuItem>
             </Select>
           </InputLabel>
           <InputLabel style={{width: '80%'}}>Book: 
@@ -175,10 +174,10 @@ export default function Books(props){
                 onChange={e => setType(e.target.value)}
                 label="type"
               >
-                <MenuItem style={{minWidth: '80%'}} value='Baptismal'>Baptismal</MenuItem>
-                <MenuItem style={{minWidth: '80%'}} value='Confirmation'>Confirmation</MenuItem>
-                <MenuItem style={{minWidth: '80%'}} value='Death'>Death</MenuItem>
-                <MenuItem style={{minWidth: '80%'}} value='Marriage'>Marriage</MenuItem>
+                <MenuItem style={{minWidth: '80%'}} value='baptismal'>Baptismal</MenuItem>
+                <MenuItem style={{minWidth: '80%'}} value='confirmation'>Confirmation</MenuItem>
+                <MenuItem style={{minWidth: '80%'}} value='death'>Death</MenuItem>
+                <MenuItem style={{minWidth: '80%'}} value='marriage'>Marriage</MenuItem>
               </Select>
             </InputLabel>
             <Button variant="contained" type="submit" className={classes.addBtn}>
