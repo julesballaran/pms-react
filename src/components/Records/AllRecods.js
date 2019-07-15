@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import MaterialTable from 'material-table';
+import MaterialTable, { MTableToolbar } from 'material-table';
+
+import AddBox from '@material-ui/icons/AddBox';
 
 const styleCell = {
   padding: 0,
@@ -7,7 +9,7 @@ const styleCell = {
 }
 
 export default function Baptismal(props){
-  const { baptismal, confirmation } = props
+  const { baptismal, confirmation, death, marriage } = props
   const [state] = useState({
     columns: [
       { title: 'Book', field: 'book', cellStyle: {styleCell}},
@@ -20,7 +22,7 @@ export default function Baptismal(props){
       { title: 'Date', field: 'date', cellStyle: {styleCell}},
       { title: 'Type', field: 'type', cellStyle: {styleCell}},
     ],
-    data: [...baptismal, ...confirmation]
+    data: [...baptismal, ...confirmation, ...death, ...marriage]
   })
 
 

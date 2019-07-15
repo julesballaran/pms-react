@@ -7,7 +7,7 @@ import {
 import Book from '@material-ui/icons/Book';
 
 export default function DisplayBooks(props) {
-  const { bookList, baptismal, confirmation } = props
+  const { bookList, baptismal, confirmation, death, marriage } = props
 
   return (
     <Grid
@@ -24,7 +24,12 @@ export default function DisplayBooks(props) {
             <p>{book.type}</p>
             <EntryCount 
               no={book.bookNo}
-              book={book.type === 'baptismal' ? baptismal : confirmation}
+              book={
+                book.type === 'baptismal' ? baptismal 
+                : book.type === 'confirmation' ? confirmation 
+                : book.type === 'death' ? death 
+                : marriage
+              }
             />
           </Paper>
         </Link>

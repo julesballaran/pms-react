@@ -17,6 +17,12 @@
       "bookNo": "3",
       "type": "baptismal",
       "id": 3
+    },
+    {
+      "bookName": "Book 1",
+      "bookNo": "1",
+      "type": "death",
+      "id": 4
     }
   ],
   "baptismal": [
@@ -56,7 +62,18 @@
     }
   ],
   "death": [
-
+    {
+      "id": 1,
+      "book": "1",
+      "type": "death",
+      "page": 1,
+      "no": 1,
+      "name": "c",
+      "father": "f",
+      "mother": "m",
+      "birthdate": "asdasd",
+      "date": "asdasd"
+    }
   ],
   "marriage": [
     

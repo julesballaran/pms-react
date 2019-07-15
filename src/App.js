@@ -16,6 +16,8 @@ function App() {
   const [loaded, setLoaded] = useState(false)
   const [baptismal, setBaptismal] = useState([])
   const [confirmation, setConfirmation] = useState([])
+  const [death, setDeath] = useState([])
+  const [marriage, setMarriage] = useState([])
 
   const fetchDataAll = () => {
     axios
@@ -28,6 +30,20 @@ function App() {
     axios
       .get('http://localhost:9090/confirmation')
       .then(res => setConfirmation(res.data))
+      .finally(fetchDeath)
+  }
+
+  const fetchDeath = () => {
+    axios
+      .get('http://localhost:9090/death')
+      .then(res => setDeath(res.data))
+      .finally(fetchMarriage)
+  }
+
+  const fetchMarriage = () => {
+    axios
+      .get('http://localhost:9090/marriage')
+      .then(res => setMarriage(res.data))
       .finally(()=>setLoaded(true))
   }
 
@@ -45,6 +61,8 @@ function App() {
           <Routes 
             baptismal={baptismal}
             confirmation={confirmation}
+            death={death}
+            marriage={marriage}
             loaded={loaded}
           />
         </div>

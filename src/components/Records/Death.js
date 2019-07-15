@@ -1,7 +1,43 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import MaterialTable from 'material-table';
 
-export default function Death(){
+const styleCell = {
+  padding: 0,
+  width: 10,
+}
+
+export default function Death(props){
+  const { death, loaded } = props
+  const [state, setState] = useState({
+    columns: [
+      { title: 'Book', field: 'book', cellStyle: {styleCell}},
+      { title: 'Page', field: 'page', cellStyle: {styleCell}},
+      { title: 'No', field: 'no', cellStyle: {styleCell}},
+      { title: 'Name', field: 'name', cellStyle: {styleCell}},
+      { title: 'Father', field: 'father', cellStyle: {styleCell}},
+      { title: 'Mother', field: 'mother', cellStyle: {styleCell}},
+      { title: 'Birth Date', field: 'birthdate', cellStyle: {styleCell}},
+      { title: 'Date', field: 'date', cellStyle: {styleCell}},
+    ],
+    data: death
+  })
+
+  useEffect(()=>{
+    if(!loaded){
+      props.history.push('/');
+    } else {
+      if(props.match.params.no){
+        setState({...state, ...{data: death.filter(d => d.book === props.match.params.no)}})
+      }
+    }
+  }, [])
+
   return (
-    <h1>Death</h1>
+    <MaterialTable
+      title="Confirmation"
+      columns={state.columns}
+      data={state.data}
+      onRowClick={(e, rowData)=> console.log(rowData)}
+    />
   )
 }

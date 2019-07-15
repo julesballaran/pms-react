@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 
 
 export default function Books(props){
-  const { confirmation, baptismal, loaded } = props
+  const { confirmation, baptismal, death, marriage, loaded } = props
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [type, setType] = useState('')
@@ -108,6 +108,8 @@ export default function Books(props){
         bookList={bookList}
         confirmation={confirmation}
         baptismal={baptismal}
+        death={death}
+        marriage={marriage}
       />
       <Dialog
         open={removeOpen}

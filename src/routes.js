@@ -10,7 +10,7 @@ import Manage from './components/Manage/Manage'
 import AllRecords from './components/Records/AllRecods'
 
 export default function Routes(props) {
-  const { baptismal, confirmation, loaded } = props
+  const { baptismal, confirmation, death, marriage, loaded } = props
   return (
     <Switch>
       <Route exact path='/'
@@ -19,6 +19,8 @@ export default function Routes(props) {
             {...props}
             baptismal={baptismal} 
             confirmation={confirmation}
+            death={death}
+            marriage={marriage}
           />
         }
       />
@@ -58,14 +60,50 @@ export default function Routes(props) {
           />
         }
       />
-      <Route path='/death' component={Death}/>
-      <Route path='/marriage' component={Marriage}/>
+      <Route exact path='/death/' 
+        render={(props) => 
+          <Death  
+            {...props} 
+            death={death} 
+            loaded={loaded}
+          />
+        }
+      />
+      <Route path='/death/:no' 
+        render={(props) => 
+          <Death  
+            {...props} 
+            death={death} 
+            loaded={loaded}
+          />
+        }
+      />
+      <Route exact path='/marriage/' 
+        render={(props) => 
+          <Marriage  
+            {...props} 
+            marriage={marriage} 
+            loaded={loaded}
+          />
+        }
+      />
+      <Route path='/marriage/:no' 
+        render={(props) => 
+          <Marriage  
+            {...props} 
+            marriage={marriage} 
+            loaded={loaded}
+          />
+        }
+      />
       <Route path='/books' 
         render={(props)=>
           <Books 
             {...props}
             baptismal={baptismal}
             confirmation={confirmation} 
+            death={death}
+            marriage={marriage} 
             loaded={loaded}
           />
         }
