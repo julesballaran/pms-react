@@ -40,9 +40,6 @@ export default function Books(props){
   const [bookName, setBookName] = useState('')
   const [bookNo, setBookNo] = useState('')
   const [bookList, setBookList] = useState([])
-  const [removeOpen, setRemoveOpen] = useState(false)
-  const [removeBookList, setRemoveBookList] = useState([]) 
-  const [removeBook, setRemoveBook] = useState('') 
   
   useEffect(() => {
       if(!loaded){
@@ -76,20 +73,6 @@ export default function Books(props){
     }
   }
 
-  const removeDataBook = () => {
-    axios
-      .delete(`http://localhost:9090/books/${removeBook}`)
-      .then(()=>{
-        setRemoveOpen(false)
-        fetchData()
-      })
-  }
-
-  const setTypeRemove = val => {
-    setType(val)
-    setRemoveBookList(bookList.filter(book=>book.type === val))
-  }
-
   return (
     <React.Fragment>
       <Grid container wrap='nowrap' justify='flex-end'>
@@ -98,11 +81,6 @@ export default function Books(props){
           onClick={() => setOpen(true)}
         >Add Book
         </Button>
-        <Button 
-          className={classes.btnStyle}
-          onClick={() => setRemoveOpen(true)}
-        >Remove Book
-        </Button>
       </Grid>
       <DisplayBooks 
         bookList={bookList}
@@ -110,42 +88,8 @@ export default function Books(props){
         baptismal={baptismal}
         death={death}
         marriage={marriage}
+        fetchData={fetchData}
       />
-      <Dialog
-        open={removeOpen}
-        onClose={()=>setRemoveOpen(false)}
-      >
-        <div className="modal-style">
-          <InputLabel style={{width: '80%'}}>Type: 
-            <Select
-              style={{width: '100%'}}
-              value={type}
-              onChange={e => setTypeRemove(e.target.value)}
-              label="type"
-            >
-              <MenuItem style={{minWidth: '80%'}} value='baptismal'>Baptismal</MenuItem>
-              <MenuItem style={{minWidth: '80%'}} value='confirmation'>Confirmation</MenuItem>
-              <MenuItem style={{minWidth: '80%'}} value='death'>Death</MenuItem>
-              <MenuItem style={{minWidth: '80%'}} value='marriage'>Marriage</MenuItem>
-            </Select>
-          </InputLabel>
-          <InputLabel style={{width: '80%'}}>Book: 
-            <Select
-              style={{width: '100%'}}
-              value={removeBook}
-              onChange={e => setRemoveBook(e.target.value)}
-              label="type"
-            >
-              {removeBookList.map(book=>(
-                <MenuItem key={book.id} style={{minWidth: '80%'}} value={book.id}>{book.bookName}</MenuItem>
-              ))}
-            </Select>
-          </InputLabel>
-          <Button variant="contained" className={classes.addBtn} onClick={removeDataBook}>
-            REMOVE
-          </Button>
-        </div>
-      </Dialog>
       <Dialog 
         open={open}
         onClose={() => setOpen(false)}

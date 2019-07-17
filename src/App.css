@@ -64,11 +64,42 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 180px;
+  height: 160px;
   width: 150px;
-  margin: 20px;
+  margin: 0;
+  color: black;
 }
 
 .book-style h4, .book-style p{
   margin: 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.papel:hover .actions{
+  visibility: visible;
+}
+
+.del-dialog {
+  display: flex;
+  flex-direction: column;
+}
+
+.del-dialog h3 {
+  padding: 20px;
+  text-align: center;
+}
+
+.del-dialog-btn {
+  display: flex;
+}
+
+.del-dialog-btn button {
+  margin: 20px;
 }

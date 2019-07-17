@@ -6,11 +6,8 @@ import Header from './components/Header/Header'
 import Sidenav from './components/Sidenav/Sidenav'
 import Routes from './routes'
 import axios from 'axios'
+import Loader from './loader'
 
-import { 
-  CircularProgress,
-  Grid,
-} from '@material-ui/core/'
 
 function App() {
   const [loaded, setLoaded] = useState(false)
@@ -68,15 +65,7 @@ function App() {
         </div>
       </div>
       : 
-      <Grid 
-        style={{height: '100vh'}}
-        container
-        direction="column"
-        justify="center"
-        alignItems="center"> 
-        <CircularProgress />
-        <p>fetching data...</p>
-      </Grid>
+      <Loader />
       }
     </BrowserRouter>
   );
