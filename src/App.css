@@ -103,3 +103,8 @@
 .del-dialog-btn button {
   margin: 20px;
 }
+
+.display-details {
+  height: 500px;
+  width: 500px;
+}

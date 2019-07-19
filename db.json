@@ -32,7 +32,15 @@
       "type": "baptismal",
       "page": 1,
       "no": 1,
-      "name": "b"
+      "name": "b",
+      "father": "f",
+      "mother": "m",
+      "birthdate": "2017-05-24",
+      "bdate": "asdasd",
+      "church": "st. raphael",
+      "date": "2017-05-24",
+      "rev": "father",
+      "sponsors": ["asdasd", "asdasd"]
     }
   ],
   "confirmation": [

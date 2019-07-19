@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import {ExcelRenderer, OutTable} from 'react-excel-renderer';
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import {
@@ -18,7 +19,10 @@ import {
 export default function DisplayBooks(props) {
   const { bookList, baptismal, confirmation, death, marriage, fetchData } = props
   const [delDialog, setDelDialog] = useState(false)
+  const [imp, setImp] = useState(false)
+  const [back, setBack] = useState(false)
   const [delBook, setDelBook] = useState({})
+
   const removeBook = (book) => {
     axios
       .delete(`http://localhost:9090/books/${book.id}`)
@@ -33,6 +37,10 @@ export default function DisplayBooks(props) {
         fetchData()
         setDelDialog(false)
       })
+  }
+
+  const handleFile = e => {
+    console.log(e.target.files[0])
   }
 
   return (
@@ -59,7 +67,7 @@ export default function DisplayBooks(props) {
             </Link>
             <div className='actions'>
               <Tooltip title="Import">
-                <Unarchive />
+                <Unarchive onClick={()=>setImp(true)}/>
               </Tooltip>
               <Tooltip title="Backup">
                 <Archive />
@@ -84,6 +92,22 @@ export default function DisplayBooks(props) {
           <Button variant='contained' onClick={()=> setDelDialog(false)}>Cancel</Button>  
           <Button variant='contained' color='secondary' onClick={()=>removeBook(delBook)}>Delete</Button> 
         </div>
+      </Dialog>
+      <Dialog
+        open={imp}
+        onClose={()=>setImp(false)}
+      >
+        <Button
+          variant="contained"
+          component="label"
+        >
+          Upload File
+          <input
+            type="file"
+            style={{ display: "none" }}
+            onChange={e => handleFile(e)}
+          />
+        </Button>
       </Dialog>
     </Grid>
   )

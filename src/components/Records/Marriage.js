@@ -34,7 +34,7 @@ export default function Marriage(props){
 
   return (
     <MaterialTable
-      title="Confirmation"
+      title="Marriage"
       columns={state.columns}
       data={state.data}
       onRowClick={(e, rowData)=> console.log(rowData)}

@@ -34,7 +34,7 @@ export default function Death(props){
 
   return (
     <MaterialTable
-      title="Confirmation"
+      title="Death"
       columns={state.columns}
       data={state.data}
       onRowClick={(e, rowData)=> console.log(rowData)}
