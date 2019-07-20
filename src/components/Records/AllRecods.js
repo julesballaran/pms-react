@@ -1,13 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import MaterialTable, { MTableToolbar } from 'material-table';
+import React, { useState } from 'react';
+import MaterialTable from 'material-table';
+import axios from 'axios'
 
-import AddBox from '@material-ui/icons/AddBox';
+import { makeStyles } from '@material-ui/styles'
 
 import {
   Dialog,
-  TextField,
   Button,
 } from '@material-ui/core/';
+
+import BaptismalDisplay from './display/BaptismalDisplay'
+import ConfirmationDisplay from './display/ConfirmationDisplay'
+import DeathDisplay from './display/DeathDisplay'
+import MarriageDisplay from './display/MarriageDisplay'
+
+const useStyles = makeStyles({
+  tFieldCont: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    margin: '0 20px',
+  },
+  tField: {
+    flex: '1 1 100%',
+    margin: 10,
+  }
+})
 
 const styleCell = {
   padding: 0,
@@ -15,24 +32,34 @@ const styleCell = {
 }
 
 export default function AllRecords(props){
+  const classes = useStyles()
   const { baptismal, confirmation, death, marriage } = props
   const [data, setData] = useState({})
   const [modal, setModal] = useState(false)
   const [edit, setEdit] = useState(true)
+  const [delDialog, setDelDialog] = useState(false)
   const [state] = useState({
     columns: [
       { title: 'Book', field: 'book', cellStyle: {styleCell}},
       { title: 'Page', field: 'page', cellStyle: {styleCell}},
-      { title: 'No', field: 'no', cellStyle: {styleCell}},
       { title: 'Name', field: 'name', cellStyle: {styleCell}},
       { title: 'Father', field: 'father', cellStyle: {styleCell}},
       { title: 'Mother', field: 'mother', cellStyle: {styleCell}},
-      { title: 'Birth Date', field: 'birthdate', cellStyle: {styleCell}},
       { title: 'Date', field: 'date', cellStyle: {styleCell}},
       { title: 'Type', field: 'type', cellStyle: {styleCell}},
     ],
     data: [...baptismal, ...confirmation, ...death, ...marriage]
   })
+
+  const handleEdit = () => {
+    axios.put(`http://localhost:9090/${data.type}/${data.id}`, data)
+    window.location.reload()
+  }
+
+  const handleDelete = () => {
+    axios.delete(`http://localhost:9090/${data.type}/${data.id}`)
+    window.location.reload()
+  }
 
   return (
     <React.Fragment>
@@ -45,33 +72,65 @@ export default function AllRecords(props){
           setModal(true)
         }}
       />
-      <Dialog
-        open={modal}
-        onClose={()=>setModal(false)}
+      {data.type === 'baptismal' ? 
+        <BaptismalDisplay 
+          modal={modal}
+          setModal={setModal}
+          classes={classes}
+          data={data}
+          setData={setData}
+          edit={edit}
+          setEdit={setEdit}
+          handleEdit={handleEdit}
+          setDelDialog={setDelDialog}
+        />
+      : data.type === 'confirmation' ?
+        <ConfirmationDisplay 
+          modal={modal}
+          setModal={setModal}
+          classes={classes}
+          data={data}
+          setData={setData}
+          edit={edit}
+          setEdit={setEdit}
+          handleEdit={handleEdit}
+          setDelDialog={setDelDialog}
+        />
+      : data.type === 'death' ? 
+        <DeathDisplay 
+          modal={modal}
+          setModal={setModal}
+          classes={classes}
+          data={data}
+          setData={setData}
+          edit={edit}
+          setEdit={setEdit}
+          handleEdit={handleEdit}
+          setDelDialog={setDelDialog}
+        />
+      : data.type === 'marriage' ?
+        <MarriageDisplay 
+          modal={modal}
+          setModal={setModal}
+          classes={classes}
+          data={data}
+          setData={setData}
+          edit={edit}
+          setEdit={setEdit}
+          handleEdit={handleEdit}
+          setDelDialog={setDelDialog}
+        />    
+      : null
+      }
+      <Dialog 
+        open={delDialog}
+        onClose={()=>setDelDialog(false)}
+        className='del-dialog'
       >
-        <div className='display-details'> 
-          <TextField disabled={edit} label='Book' value={data.book} onChange={e => setData({...data, book: e.target.value})}/>
-          <TextField disabled={edit} label='Page' value={data.page} onChange={e => setData({...data, page: e.target.value})}/>
-          <TextField disabled={edit} label='No' value={data.no} onChange={e => setData({...data, no: e.target.value})}/>
-          <TextField disabled={edit} label='Name' value={data.name} onChange={e => setData({...data, name: e.target.value})}/>
-          <TextField disabled={edit}label='Father' value={data.father} onChange={e => setData({...data, father: e.target.value})}/>
-          <TextField disabled={edit} label='Mother' value={data.mother} onChange={e => setData({...data, mother: e.target.value})}/>
-          <TextField disabled={edit} label='Birthdate' type='date' value={data.birthdate} onChange={e => setData({...data, birthdate: e.target.value})}/>
-          <TextField disabled={edit} label='Church' value={data.church} onChange={e => setData({...data, church: e.target.value})}/>
-          <TextField disabled={edit} label='Date' type='date' value={data.date} onChange={e => setData({...data, date: e.target.value})}/>
-          <TextField disabled={edit} label='Rev' value={data.rev} onChange={e => setData({...data, rev: e.target.value})}/>
-          <TextField disabled={edit}label='Sponsors' value={data.sponsors} onChange={e => setData({...data, sponsors: e.target.value.split(',')})}/>
-          {edit ? 
-          <div>
-            <Button variant='contained' color='primary'>Print</Button>
-            <Button variant='contained' style={{background: 'green', color: 'white'}} onClick={() => setEdit(false)}>Edit</Button>
-            <Button variant='contained' color='secondary'>Delete</Button>
-          </div>
-          : 
-          <div>
-            <Button variant='contained' style={{background: 'green', color: 'white'}} onClick={() => setEdit(true)}>Save</Button>
-          </div>
-          }
+        <h3>Remove {data.name}?</h3>
+        <div className='del-dialog-btn'>
+          <Button variant='contained' onClick={()=> setDelDialog(false)}>Cancel</Button>  
+          <Button variant='contained' color='secondary' onClick={handleDelete}>Delete</Button> 
         </div>
       </Dialog>
     </React.Fragment>

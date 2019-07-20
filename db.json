@@ -15,7 +15,7 @@
     {
       "bookName": "Book 3",
       "bookNo": "3",
-      "type": "baptismal",
+      "type": "confirmation",
       "id": 3
     },
     {
@@ -23,6 +23,12 @@
       "bookNo": "1",
       "type": "death",
       "id": 4
+    },
+    {
+      "bookName": "Book 1",
+      "bookNo": "1",
+      "type": "marriage",
+      "id": 5
     }
   ],
   "baptismal": [
@@ -30,8 +36,8 @@
       "id": 1,
       "book": "1",
       "type": "baptismal",
-      "page": 1,
-      "no": 1,
+      "page": "2",
+      "no": "11",
       "name": "b",
       "father": "f",
       "mother": "m",
@@ -40,7 +46,13 @@
       "church": "st. raphael",
       "date": "2017-05-24",
       "rev": "father",
-      "sponsors": ["asdasd", "asdasd"]
+      "sponsors": [
+        "asdasd",
+        "asdasd"
+      ],
+      "tableData": {
+        "id": 0
+      }
     }
   ],
   "confirmation": [
@@ -52,9 +64,12 @@
       "no": 1,
       "name": "c",
       "father": "f",
-      "mother": "m",
-      "birthdate": "asdasd",
-      "date": "asdasd"
+      "mother": "mo",
+      "date": "2017-05-24",
+      "rev": "father",
+      "tableData": {
+        "id": 1
+      }
     },
     {
       "id": 2,
@@ -65,8 +80,8 @@
       "name": "c",
       "father": "f",
       "mother": "m",
-      "birthdate": "asdasd",
-      "date": "asdasd"
+      "date": "2017-05-24",
+      "rev": "father"
     }
   ],
   "death": [
@@ -74,16 +89,50 @@
       "id": 1,
       "book": "1",
       "type": "death",
-      "page": 1,
-      "no": 1,
+      "page": "2",
       "name": "c",
       "father": "f",
       "mother": "m",
-      "birthdate": "asdasd",
-      "date": "asdasd"
+      "spouse": "asds",
+      "date": "2017-05-24",
+      "age": "100",
+      "nationality": "f",
+      "residence": "asd",
+      "civilstatus": "asds",
+      "dateofdeath": "2017-05-24",
+      "causeofdeath": "asds",
+      "placeofburial": "asd",
+      "rev": "asds",
+      "tableData": {
+        "id": 3
+      }
     }
   ],
   "marriage": [
-    
+    {
+      "id": 1,
+      "book": "1",
+      "type": "marriage",
+      "page": 1,
+      "name": "c",
+      "name1": "d",
+      "father": "f",
+      "mother": "m",
+      "father1": "f",
+      "mother1": "m",
+      "age": "100",
+      "age1": "100",
+      "nationality": "f",
+      "nationality1": "f",
+      "residence": "asd",
+      "residence1": "asd",
+      "civilstatus": "asds",
+      "civilstatus1": "asds",
+      "witness": "Aasdasd",
+      "witness1": "Aasdasd",
+      "date": "2017-05-24",
+      "placeofmarriage": "asd",
+      "rev": "asds"
+    }
   ]
 }

@@ -1,5 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import MaterialTable from 'material-table';
+import axios from 'axios'
+import { makeStyles } from '@material-ui/styles'
+import {
+  Dialog,
+  Button,
+} from '@material-ui/core/';
+
+import MarriageDisplay from './display/MarriageDisplay'
+
+const useStyles = makeStyles({
+  tFieldCont: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    margin: '0 20px',
+  },
+  tField: {
+    flex: '1 1 100%',
+    margin: 10,
+  }
+})
 
 const styleCell = {
   padding: 0,
@@ -7,17 +27,21 @@ const styleCell = {
 }
 
 export default function Marriage(props){
+  const classes = useStyles()
   const { marriage, loaded } = props
+  const [data, setData] = useState({})
+  const [modal, setModal] = useState(false)
+  const [edit, setEdit] = useState(true)
+  const [delDialog, setDelDialog] = useState(false)
   const [state, setState] = useState({
     columns: [
       { title: 'Book', field: 'book', cellStyle: {styleCell}},
       { title: 'Page', field: 'page', cellStyle: {styleCell}},
-      { title: 'No', field: 'no', cellStyle: {styleCell}},
-      { title: 'Name', field: 'name', cellStyle: {styleCell}},
-      { title: 'Father', field: 'father', cellStyle: {styleCell}},
-      { title: 'Mother', field: 'mother', cellStyle: {styleCell}},
-      { title: 'Birth Date', field: 'birthdate', cellStyle: {styleCell}},
-      { title: 'Date', field: 'date', cellStyle: {styleCell}},
+      { title: 'Name #1', field: 'name', cellStyle: {styleCell}},
+      { title: 'Name #2', field: 'name1', cellStyle: {styleCell}},
+      { title: 'Age #1', field: 'age', cellStyle: {styleCell}},
+      { title: 'Age #2', field: 'age1', cellStyle: {styleCell}},
+      { title: 'Date of Marriage', field: 'date', cellStyle: {styleCell}},
     ],
     data: marriage
   })
@@ -32,12 +56,49 @@ export default function Marriage(props){
     }
   }, [])
 
+  const handleEdit = () => {
+    axios.put(`http://localhost:9090/${data.type}/${data.id}`, data)
+    window.location.reload()
+  }
+
+  const handleDelete = () => {
+    axios.delete(`http://localhost:9090/${data.type}/${data.id}`)
+    window.location.reload()
+  }
+
   return (
-    <MaterialTable
-      title="Marriage"
-      columns={state.columns}
-      data={state.data}
-      onRowClick={(e, rowData)=> console.log(rowData)}
-    />
+    <React.Fragment>
+      <MaterialTable
+        title="Marriage"
+        columns={state.columns}
+        data={state.data}
+        onRowClick={(e, rowData) => {
+          setData(rowData)
+          setModal(true)
+        }}
+      />
+      <MarriageDisplay 
+        modal={modal}
+        setModal={setModal}
+        classes={classes}
+        data={data}
+        setData={setData}
+        edit={edit}
+        setEdit={setEdit}
+        handleEdit={handleEdit}
+        setDelDialog={setDelDialog}
+      />
+      <Dialog 
+        open={delDialog}
+        onClose={()=>setDelDialog(false)}
+        className='del-dialog'
+      >
+        <h3>Remove {data.name}?</h3>
+        <div className='del-dialog-btn'>
+          <Button variant='contained' onClick={()=> setDelDialog(false)}>Cancel</Button>  
+          <Button variant='contained' color='secondary' onClick={handleDelete}>Delete</Button> 
+        </div>
+      </Dialog>
+    </React.Fragment>
   )
 }
