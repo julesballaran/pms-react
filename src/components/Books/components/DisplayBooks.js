@@ -14,7 +14,8 @@ import {
   Delete,
   Unarchive,
   Archive
-}from '@material-ui/icons/';
+} from '@material-ui/icons/';
+import ImportData from './ImportData'
 
 export default function DisplayBooks(props) {
   const { bookList, baptismal, confirmation, death, marriage, fetchData } = props
@@ -37,10 +38,6 @@ export default function DisplayBooks(props) {
         fetchData()
         setDelDialog(false)
       })
-  }
-
-  const handleFile = e => {
-    console.log(e.target.files[0])
   }
 
   return (
@@ -93,22 +90,10 @@ export default function DisplayBooks(props) {
           <Button variant='contained' color='secondary' onClick={()=>removeBook(delBook)}>Delete</Button> 
         </div>
       </Dialog>
-      <Dialog
-        open={imp}
-        onClose={()=>setImp(false)}
-      >
-        <Button
-          variant="contained"
-          component="label"
-        >
-          Upload File
-          <input
-            type="file"
-            style={{ display: "none" }}
-            onChange={e => handleFile(e)}
-          />
-        </Button>
-      </Dialog>
+      <ImportData 
+        imp={imp}
+        setImp={setImp}
+      />
     </Grid>
   )
 }
