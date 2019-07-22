@@ -23,6 +23,7 @@ export default function DisplayBooks(props) {
   const [imp, setImp] = useState(false)
   const [back, setBack] = useState(false)
   const [delBook, setDelBook] = useState({})
+  const [selectedBook, setSelectedBook] = useState({})
 
   const removeBook = (book) => {
     axios
@@ -62,7 +63,7 @@ export default function DisplayBooks(props) {
               }
             />
             </Link>
-            <div className='actions'>
+            <div className='actions' onClick={()=> setSelectedBook(book)}>
               <Tooltip title="Import">
                 <Unarchive onClick={()=>setImp(true)}/>
               </Tooltip>
@@ -93,6 +94,7 @@ export default function DisplayBooks(props) {
       <ImportData 
         imp={imp}
         setImp={setImp}
+        selectedBook={selectedBook}
       />
     </Grid>
   )

@@ -5,7 +5,7 @@ import {
   Grid,
 } from '@material-ui/core/'
 
-export default function Loader() {
+export default function Loader(props) {
   return (
     <Grid 
       style={{height: '100vh'}}
@@ -14,7 +14,7 @@ export default function Loader() {
       justify="center"
       alignItems="center"> 
       <CircularProgress />
-      <p>fetching data...</p>
+      <p>{props.text}</p>
     </Grid>
   )
 }

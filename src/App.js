@@ -65,7 +65,7 @@ function App() {
         </div>
       </div>
       : 
-      <Loader />
+      <Loader text={'fetching data...'}/>
       }
     </BrowserRouter>
   );
