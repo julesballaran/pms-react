@@ -103,7 +103,7 @@
     },
     {
       "book": "3",
-      "page": 1,
+      "page": "1",
       "no": 1,
       "name": "name",
       "father": "father",
@@ -111,7 +111,10 @@
       "date": "date",
       "rev": "priest",
       "type": "confirmation",
-      "id": 4
+      "id": 4,
+      "tableData": {
+        "id": 4
+      }
     },
     {
       "book": "3",

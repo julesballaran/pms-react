@@ -14,6 +14,8 @@ import ConfirmationDisplay from './display/ConfirmationDisplay'
 import DeathDisplay from './display/DeathDisplay'
 import MarriageDisplay from './display/MarriageDisplay'
 
+import print from './print/print'
+
 const useStyles = makeStyles({
   tFieldCont: {
     display: 'flex',
@@ -83,6 +85,7 @@ export default function AllRecords(props){
           setEdit={setEdit}
           handleEdit={handleEdit}
           setDelDialog={setDelDialog}
+          print={print}
         />
       : data.type === 'confirmation' ?
         <ConfirmationDisplay 

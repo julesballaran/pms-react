@@ -33,7 +33,7 @@ export default function Routes(props) {
           />
         }
       />
-      <Route path='/baptismal/:no' 
+      <Route path='/baptismal/:no'
         render={(props) => 
           <Baptismal  
             {...props} 
@@ -42,7 +42,7 @@ export default function Routes(props) {
           />
         }
       />
-      <Route exact path='/confirmation/' 
+      <Route exact path='/confirmation/' title='test'
         render={(props) => 
           <Confirmation  
             {...props} 
