@@ -34,11 +34,14 @@ export default function BaptismalDisplay(props) {
             <TextField className={classes.tField} disabled={edit} label='Date of Baptismal' type='date' value={data.date} onChange={e => setData({...data, date: e.target.value})}/>
           </div>
           <div className={classes.tFieldCont}>
-            <TextField className={classes.tField} disabled={edit} label='Church' value={data.church} onChange={e => setData({...data, church: e.target.value})}/>
-            <TextField className={classes.tField} disabled={edit} label='Rev' value={data.rev} onChange={e => setData({...data, rev: e.target.value})}/>
+            <TextField className={classes.tField} disabled={edit} label='Place of Birth' value={data.birthplace} onChange={e => setData({...data, birthplace: e.target.value})}/>
           </div>
           <div className={classes.tFieldCont}>
-            <TextField className={classes.tField} disabled={edit}label='Sponsors' value={data.sponsors} onChange={e => setData({...data, sponsors: e.target.value.split(',')})}/>
+            <TextField className={classes.tField} disabled={edit}label='Sponsor #1' value={data.sponsor1} onChange={e => setData({...data, sponsor1: e.target.value.split(',')})}/>
+            <TextField className={classes.tField} disabled={edit}label='Sponsor #2' value={data.sponsor2} onChange={e => setData({...data, sponsor2: e.target.value.split(',')})}/>
+          </div>
+          <div className={classes.tFieldCont}>
+            <TextField className={classes.tField} disabled={edit} label='Rev' value={data.rev} onChange={e => setData({...data, rev: e.target.value})}/>
           </div>
           {edit ? 
           <div className={classes.tFieldCont} style={{marginBottom: 20}}>

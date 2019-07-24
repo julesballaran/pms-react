@@ -43,13 +43,13 @@
       "mother": "m",
       "birthdate": "2017-05-24",
       "bdate": "asdasd",
-      "church": "st. raphael",
+      "birthplace": "st. raphae",
       "date": "2017-05-24",
       "rev": "father",
-      "sponsors": [
-        "asdasd",
-        "asdasd"
+      "sponsor1": [
+        "asdasd1"
       ],
+      "sponsor2": "asdasd2",
       "tableData": {
         "id": 0
       }
@@ -100,153 +100,6 @@
       "tableData": {
         "id": 1
       }
-    },
-    {
-      "book": "3",
-      "page": "1",
-      "no": 1,
-      "name": "name",
-      "father": "father",
-      "mother": "mother",
-      "date": "date",
-      "rev": "priest",
-      "type": "confirmation",
-      "id": 4,
-      "tableData": {
-        "id": 4
-      }
-    },
-    {
-      "book": "3",
-      "page": 1,
-      "no": 1,
-      "name": "name",
-      "father": "father",
-      "mother": "mother",
-      "date": "date",
-      "rev": "priest",
-      "type": "confirmation",
-      "id": 5
-    },
-    {
-      "book": "3",
-      "page": 1,
-      "no": 1,
-      "name": "name",
-      "father": "father",
-      "mother": "mother",
-      "date": "date",
-      "rev": "priest",
-      "type": "confirmation",
-      "id": 6
-    },
-    {
-      "book": "3",
-      "page": 1,
-      "no": 1,
-      "name": "name",
-      "father": "father",
-      "mother": "mother",
-      "date": "date",
-      "rev": "priest",
-      "type": "confirmation",
-      "id": 7
-    },
-    {
-      "book": "3",
-      "page": 1,
-      "no": 1,
-      "name": "name",
-      "father": "father",
-      "mother": "mother",
-      "date": "date",
-      "rev": "priest",
-      "type": "confirmation",
-      "id": 8
-    },
-    {
-      "book": "3",
-      "page": 1,
-      "no": 1,
-      "name": "name",
-      "father": "father",
-      "mother": "mother",
-      "date": "date",
-      "rev": "priest",
-      "type": "confirmation",
-      "id": 9
-    },
-    {
-      "book": "3",
-      "page": 1,
-      "no": 1,
-      "name": "name",
-      "father": "father",
-      "mother": "mother",
-      "date": "date",
-      "rev": "priest",
-      "type": "confirmation",
-      "id": 10
-    },
-    {
-      "book": "3",
-      "page": 1,
-      "no": 1,
-      "name": "name",
-      "father": "father",
-      "mother": "mother",
-      "date": "date",
-      "rev": "priest",
-      "type": "confirmation",
-      "id": 11
-    },
-    {
-      "book": "3",
-      "page": 1,
-      "no": 1,
-      "name": "name",
-      "father": "father",
-      "mother": "mother",
-      "date": "date",
-      "rev": "priest",
-      "type": "confirmation",
-      "id": 12
-    },
-    {
-      "book": "3",
-      "page": 1,
-      "no": 1,
-      "name": "name",
-      "father": "father",
-      "mother": "mother",
-      "date": "date",
-      "rev": "priest",
-      "type": "confirmation",
-      "id": 13
-    },
-    {
-      "book": "3",
-      "page": 1,
-      "no": 1,
-      "name": "name",
-      "father": "father",
-      "mother": "mother",
-      "date": "date",
-      "rev": "priest",
-      "type": "confirmation",
-      "id": 14
-    },
-    {
-      "book": "3",
-      "page": 1,
-      "no": 1,
-      "name": "name",
-      "father": "father",
-      "mother": "mother",
-      "date": "date",
-      "rev": "priest",
-      "type": "confirmation",
-      "id": 15
     }
   ],
   "death": [
@@ -280,21 +133,21 @@
       "type": "marriage",
       "page": 1,
       "name": "c",
-      "name1": "d",
+      "name2": "d",
       "father": "f",
       "mother": "m",
-      "father1": "f",
-      "mother1": "m",
+      "father2": "f",
+      "mother2": "m",
       "age": "100",
-      "age1": "100",
+      "age2": "100",
       "nationality": "f",
-      "nationality1": "f",
+      "nationality2": "f",
       "residence": "asd",
-      "residence1": "asd",
+      "residence2": "asd",
       "civilstatus": "asds",
-      "civilstatus1": "asds",
+      "civilstatus2": "asds",
       "witness": "Aasdasd",
-      "witness1": "Aasdasd",
+      "witness2": "Aasdasd",
       "date": "2017-05-24",
       "placeofmarriage": "asd",
       "rev": "asds"

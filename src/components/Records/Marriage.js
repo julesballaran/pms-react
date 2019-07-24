@@ -40,9 +40,9 @@ export default function Marriage(props){
       { title: 'Book', field: 'book', cellStyle: {styleCell}},
       { title: 'Page', field: 'page', cellStyle: {styleCell}},
       { title: 'Name #1', field: 'name', cellStyle: {styleCell}},
-      { title: 'Name #2', field: 'name1', cellStyle: {styleCell}},
+      { title: 'Name #2', field: 'name2', cellStyle: {styleCell}},
       { title: 'Age #1', field: 'age', cellStyle: {styleCell}},
-      { title: 'Age #2', field: 'age1', cellStyle: {styleCell}},
+      { title: 'Age #2', field: 'age2', cellStyle: {styleCell}},
       { title: 'Date of Marriage', field: 'date', cellStyle: {styleCell}},
     ],
     data: marriage

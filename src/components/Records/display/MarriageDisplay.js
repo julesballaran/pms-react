@@ -26,8 +26,8 @@ export default function MarriageDisplay(props) {
           <TextField className={classes.tField} disabled={edit} label='Age #1' value={data.age} onChange={e => setData({...data, age: e.target.value})}/>
         </div>
         <div className={classes.tFieldCont}>
-          <TextField className={classes.tField} disabled={edit} label='Name #2' value={data.name1} onChange={e => setData({...data, name1: e.target.value})}/>
-          <TextField className={classes.tField} disabled={edit} label='Age #2' value={data.age1} onChange={e => setData({...data, age1: e.target.value})}/>
+          <TextField className={classes.tField} disabled={edit} label='Name #2' value={data.name2} onChange={e => setData({...data, name2: e.target.value})}/>
+          <TextField className={classes.tField} disabled={edit} label='Age #2' value={data.age2} onChange={e => setData({...data, age2: e.target.value})}/>
         </div>
         <div className={classes.tFieldCont}>
           <TextField className={classes.tField} disabled={edit} label='Civil Status #1' value={data.civilstatus} onChange={e => setData({...data, civilstatus: e.target.value})}/>
@@ -35,21 +35,21 @@ export default function MarriageDisplay(props) {
           <TextField className={classes.tField} disabled={edit} label='Residence #1' value={data.residence} onChange={e => setData({...data, residence: e.target.value})}/>
         </div>
         <div className={classes.tFieldCont}>
-          <TextField className={classes.tField} disabled={edit} label='Civil Status #2' value={data.civilstatus1} onChange={e => setData({...data, civilstatus1: e.target.value})}/>
-          <TextField className={classes.tField} disabled={edit} label='Nationality #2' value={data.nationality1} onChange={e => setData({...data, nationality1: e.target.value})}/>
-          <TextField className={classes.tField} disabled={edit} label='Residence #2' value={data.residence1} onChange={e => setData({...data, residence1: e.target.value})}/>
+          <TextField className={classes.tField} disabled={edit} label='Civil Status #2' value={data.civilstatus2} onChange={e => setData({...data, civilstatus2: e.target.value})}/>
+          <TextField className={classes.tField} disabled={edit} label='Nationality #2' value={data.nationality2} onChange={e => setData({...data, nationality2: e.target.value})}/>
+          <TextField className={classes.tField} disabled={edit} label='Residence #2' value={data.residence2} onChange={e => setData({...data, residence2: e.target.value})}/>
         </div>
         <div className={classes.tFieldCont}>
           <TextField className={classes.tField} disabled={edit} label='Father #1' value={data.father} onChange={e => setData({...data, father: e.target.value})}/>
           <TextField className={classes.tField} disabled={edit} label='Mother #1' value={data.mother} onChange={e => setData({...data, mother: e.target.value})}/>
         </div>
         <div className={classes.tFieldCont}>
-          <TextField className={classes.tField} disabled={edit} label='Father #2' value={data.father1} onChange={e => setData({...data, father1: e.target.value})}/>
-          <TextField className={classes.tField} disabled={edit} label='Mother #2' value={data.mother1} onChange={e => setData({...data, mother1: e.target.value})}/>
+          <TextField className={classes.tField} disabled={edit} label='Father #2' value={data.father2} onChange={e => setData({...data, father2: e.target.value})}/>
+          <TextField className={classes.tField} disabled={edit} label='Mother #2' value={data.mother2} onChange={e => setData({...data, mother2: e.target.value})}/>
         </div>
         <div className={classes.tFieldCont}>
           <TextField className={classes.tField} disabled={edit} label='Witness #1' value={data.witness} onChange={e => setData({...data, witness: e.target.value})}/>
-          <TextField className={classes.tField} disabled={edit} label='Witness #2' value={data.witness1} onChange={e => setData({...data, witness1: e.target.value})}/>
+          <TextField className={classes.tField} disabled={edit} label='Witness #2' value={data.witness2} onChange={e => setData({...data, witness2: e.target.value})}/>
         </div>
         <div className={classes.tFieldCont}>
           <TextField className={classes.tField} disabled={edit} label='Date of Marriage' type='date' value={data.date} onChange={e => setData({...data, date: e.target.value})}/>
