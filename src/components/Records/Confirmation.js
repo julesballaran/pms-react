@@ -9,6 +9,8 @@ import {
 
 import ConfirmationDisplay from './display/ConfirmationDisplay'
 
+import print from './print/print'
+
 const useStyles = makeStyles({
   tFieldCont: {
     display: 'flex',
@@ -87,6 +89,7 @@ export default function Confirmation(props) {
         setEdit={setEdit}
         handleEdit={handleEdit}
         setDelDialog={setDelDialog}
+        print={print}
       />
       <Dialog 
         open={delDialog}

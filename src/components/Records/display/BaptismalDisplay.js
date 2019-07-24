@@ -42,7 +42,7 @@ export default function BaptismalDisplay(props) {
           </div>
           {edit ? 
           <div className={classes.tFieldCont} style={{marginBottom: 20}}>
-            <Button className={classes.tField} variant='contained' color='primary' onClick={print}>Print</Button>
+            <Button className={classes.tField} variant='contained' color='primary' onClick={()=>print(data)}>Print</Button>
             <Button className={classes.tField} variant='contained' style={{background: 'green', color: 'white'}} onClick={() => setEdit(false)}>Edit</Button>
             <Button className={classes.tField} variant='contained' color='secondary' onClick={() => setDelDialog(true)}>Delete</Button>
           </div>

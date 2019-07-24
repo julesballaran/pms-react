@@ -9,6 +9,8 @@ import {
 
 import DeathDisplay from './display/DeathDisplay'
 
+import print from './print/print'
+
 const useStyles = makeStyles({
   tFieldCont: {
     display: 'flex',
@@ -88,6 +90,7 @@ export default function Death(props){
         setEdit={setEdit}
         handleEdit={handleEdit}
         setDelDialog={setDelDialog}
+        print={print}
       />
       <Dialog 
         open={delDialog}

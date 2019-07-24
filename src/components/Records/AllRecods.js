@@ -98,6 +98,7 @@ export default function AllRecords(props){
           setEdit={setEdit}
           handleEdit={handleEdit}
           setDelDialog={setDelDialog}
+          print={print}
         />
       : data.type === 'death' ? 
         <DeathDisplay 
@@ -110,6 +111,7 @@ export default function AllRecords(props){
           setEdit={setEdit}
           handleEdit={handleEdit}
           setDelDialog={setDelDialog}
+          print={print}
         />
       : data.type === 'marriage' ?
         <MarriageDisplay 
@@ -122,6 +124,7 @@ export default function AllRecords(props){
           setEdit={setEdit}
           handleEdit={handleEdit}
           setDelDialog={setDelDialog}
+          print={print}
         />    
       : null
       }

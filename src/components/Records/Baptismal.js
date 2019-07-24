@@ -11,6 +11,8 @@ import {
 
 import BaptismalDisplay from './display/BaptismalDisplay'
 
+import print from './print/print'
+
 const useStyles = makeStyles({
   tFieldCont: {
     display: 'flex',
@@ -90,6 +92,7 @@ export default function Baptismal(props){
         setEdit={setEdit}
         handleEdit={handleEdit}
         setDelDialog={setDelDialog}
+        print={print}
       />
       <Dialog 
         open={delDialog}
