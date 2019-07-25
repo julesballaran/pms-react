@@ -7,7 +7,7 @@ import {
 import { ExcelRenderer } from 'react-excel-renderer'
 
 export default function ImportData(props) {
-  const { imp, setImp, selectedBook} = props
+  const { imp, setImp, selectedBook } = props
   
   const handleFile = e => {
     const file = e.target.files[0]
@@ -19,6 +19,10 @@ export default function ImportData(props) {
           importBaptismal(res.rows)
         } else if (selectedBook.type === 'confirmation'){
           importConfirmation(res.rows)
+        } else if (selectedBook.type === 'death'){
+          importDeath(res.rows)
+        } else if (selectedBook.type === 'marriage'){
+          importMarriage(res.rows)
         }
       }
     })
@@ -26,25 +30,71 @@ export default function ImportData(props) {
 
   const importBaptismal = arr => {
     arr.shift()
+    arr.map(data => {
+      axios.post('http://localhost:9090/baptismal', {
+        book: selectedBook.bookNo,
+        page: data[0],
+        no: data[1],
+        date: data[2],
+        name: data[3],
+        father: data[4],
+        mother: data[5],
+        birthdate: data[6],
+        birthplace: data[7],
+        sponsor1: data[8],
+        sponsor2: data[9],
+        rev: data[10],
+        type: 'baptismal',
+      })
+      .finally(()=>setImp(false))
+    })
   }
 
   const importConfirmation = arr => {
     arr.shift()
     arr.map(data => {
-      axios
-        .post('http://localhost:9090/confirmation', {
-          book: selectedBook.bookNo,
-          page: data[0],
-          no: data[1],
-          name: data[2],
-          father: data[3],
-          mother: data[4],
-          date: data[5],
-          rev: data[6],
-          type: 'confirmation'
-        })
-        .finally(()=>setImp(false))
+      axios.post('http://localhost:9090/confirmation', {
+        book: selectedBook.bookNo,
+        page: data[0],
+        no: data[1],
+        date: data[2],
+        name: data[3],
+        father: data[4],
+        mother: data[5],
+        rev: data[6],
+        type: 'confirmation',
+      })
+      .finally(()=>setImp(false))
     })
+  }
+
+  const importDeath = arr => {
+    arr.shift()
+    arr.map(data => {
+      axios.post('http://localhost:9090/death', {
+        book: selectedBook.bookNo,
+        page: data[0],
+        date: data[1],
+        name: data[2],
+        age: data[3],
+        father: data[4],
+        mother: data[5],
+        spouse: data[6],
+        nationality: data[7],
+        residence: data[8],
+        civilstatus: data[9],
+        dateofdeath: data[10],
+        causeofdeath: data[11],
+        placeofburial: data[12],
+        rev: data[13],
+        type: 'death',
+      })
+      .finally(()=>setImp(false))
+    })
+  }
+
+  const importMarriage = arr => {
+    arr.shift()
   }
 
   return (

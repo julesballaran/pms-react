@@ -42,13 +42,10 @@
       "father": "f",
       "mother": "m",
       "birthdate": "2017-05-24",
-      "bdate": "asdasd",
       "birthplace": "st. raphae",
       "date": "2017-05-24",
       "rev": "father",
-      "sponsor1": [
-        "asdasd1"
-      ],
+      "sponsor1": "asdasd1",
       "sponsor2": "asdasd2",
       "tableData": {
         "id": 0
@@ -85,21 +82,6 @@
       "tableData": {
         "id": 1
       }
-    },
-    {
-      "id": 3,
-      "book": "3",
-      "type": "confirmation",
-      "page": 1,
-      "no": 1,
-      "name": "c",
-      "father": "f",
-      "mother": "mi",
-      "date": "2017-05-24",
-      "rev": "father",
-      "tableData": {
-        "id": 1
-      }
     }
   ],
   "death": [
@@ -124,6 +106,120 @@
       "tableData": {
         "id": 3
       }
+    },
+    {
+      "book": "1",
+      "page": 1,
+      "date": "2017-05-24",
+      "name": "name",
+      "age": 100,
+      "father": "father",
+      "mother": "mother",
+      "spouse": "spouse",
+      "nationality": "nationality",
+      "residence": "residence",
+      "civilstatus": "civilstatus",
+      "dateofdeath": "2017-05-24",
+      "causeofdeath": "cause of death",
+      "placeofburial": "place of burial",
+      "rev": "priest",
+      "type": "death",
+      "id": 2
+    },
+    {
+      "book": "1",
+      "page": 1,
+      "date": "2017-05-26",
+      "name": "name",
+      "age": 102,
+      "father": "father",
+      "mother": "mother",
+      "spouse": "spouse",
+      "nationality": "nationality",
+      "residence": "residence",
+      "civilstatus": "civilstatus",
+      "dateofdeath": "2017-05-26",
+      "causeofdeath": "cause of death",
+      "placeofburial": "place of burial",
+      "rev": "priest",
+      "type": "death",
+      "id": 3
+    },
+    {
+      "book": "1",
+      "page": 1,
+      "date": "2017-05-25",
+      "name": "name",
+      "age": 101,
+      "father": "father",
+      "mother": "mother",
+      "spouse": "spouse",
+      "nationality": "nationality",
+      "residence": "residence",
+      "civilstatus": "civilstatus",
+      "dateofdeath": "2017-05-25",
+      "causeofdeath": "cause of death",
+      "placeofburial": "place of burial",
+      "rev": "priest",
+      "type": "death",
+      "id": 4
+    },
+    {
+      "book": "1",
+      "page": 1,
+      "date": "2017-05-27",
+      "name": "name",
+      "age": 103,
+      "father": "father",
+      "mother": "mother",
+      "spouse": "spouse",
+      "nationality": "nationality",
+      "residence": "residence",
+      "civilstatus": "civilstatus",
+      "dateofdeath": "2017-05-27",
+      "causeofdeath": "cause of death",
+      "placeofburial": "place of burial",
+      "rev": "priest",
+      "type": "death",
+      "id": 5
+    },
+    {
+      "book": "1",
+      "page": 1,
+      "date": "2017-05-28",
+      "name": "name",
+      "age": 104,
+      "father": "father",
+      "mother": "mother",
+      "spouse": "spouse",
+      "nationality": "nationality",
+      "residence": "residence",
+      "civilstatus": "civilstatus",
+      "dateofdeath": "2017-05-28",
+      "causeofdeath": "cause of death",
+      "placeofburial": "place of burial",
+      "rev": "priest",
+      "type": "death",
+      "id": 6
+    },
+    {
+      "book": "1",
+      "page": 1,
+      "date": "2017-05-29",
+      "name": "name",
+      "age": 105,
+      "father": "father",
+      "mother": "mother",
+      "spouse": "spouse",
+      "nationality": "nationality",
+      "residence": "residence",
+      "civilstatus": "civilstatus",
+      "dateofdeath": "2017-05-29",
+      "causeofdeath": "cause of death",
+      "placeofburial": "place of burial",
+      "rev": "priest",
+      "type": "death",
+      "id": 7
     }
   ],
   "marriage": [

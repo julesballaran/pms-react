@@ -171,6 +171,6 @@ export default function print(data){
       type:"blob",
       mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     })
-    saveAs(out,`${data.type}-${data.name}-${today.split(' ').join('-').toLowerCase()}.docx`)
+    saveAs(out,`${today.split(' ').join('-').toLowerCase()}-${data.type}-${data.name.toLowerCase()}.docx`)
 	})
 }
