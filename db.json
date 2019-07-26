@@ -36,20 +36,17 @@
       "id": 1,
       "book": "1",
       "type": "baptismal",
-      "page": "2",
+      "page": "22",
       "no": "11",
-      "name": "b",
-      "father": "f",
-      "mother": "m",
+      "name": "b12",
+      "father": "f21",
+      "mother": "mother",
       "birthdate": "2017-05-24",
       "birthplace": "st. raphae",
       "date": "2017-05-24",
       "rev": "father",
       "sponsor1": "asdasd1",
-      "sponsor2": "asdasd2",
-      "tableData": {
-        "id": 0
-      }
+      "sponsor2": "asdasd2"
     }
   ],
   "confirmation": [
@@ -60,7 +57,7 @@
       "page": 1,
       "no": 1,
       "name": "c",
-      "father": "f",
+      "father": "f1",
       "mother": "mot",
       "date": "2017-05-24",
       "rev": "father",
@@ -72,16 +69,13 @@
       "id": 2,
       "book": "3",
       "type": "confirmation",
-      "page": 1,
+      "page": "12",
       "no": 1,
-      "name": "c",
+      "name": "c1",
       "father": "f",
       "mother": "mi",
       "date": "2017-05-24",
-      "rev": "father",
-      "tableData": {
-        "id": 1
-      }
+      "rev": "father"
     }
   ],
   "death": [
@@ -102,7 +96,7 @@
       "dateofdeath": "2017-05-24",
       "causeofdeath": "asds",
       "placeofburial": "asd",
-      "rev": "asds",
+      "rev": "asds1",
       "tableData": {
         "id": 3
       }
@@ -114,7 +108,7 @@
       "book": "1",
       "type": "marriage",
       "page": 1,
-      "name": "c",
+      "name": "c2",
       "name2": "d",
       "father": "f",
       "mother": "m",
@@ -131,7 +125,7 @@
       "witness": "Aasdasd",
       "witness2": "Aasdasd",
       "date": "2017-05-24",
-      "placeofmarriage": "asd",
+      "placeofmarriage": "asd1",
       "rev": "asds"
     }
   ]

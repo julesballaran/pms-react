@@ -10,7 +10,7 @@ import Manage from './components/Manage/Manage'
 import AllRecords from './components/Records/AllRecods'
 
 export default function Routes(props) {
-  const { baptismal, confirmation, death, marriage, loaded } = props
+  const { baptismal, confirmation, death, marriage, fetchDataAll, loaded } = props
   return (
     <Switch>
       <Route exact path='/'
@@ -21,6 +21,7 @@ export default function Routes(props) {
             confirmation={confirmation}
             death={death}
             marriage={marriage}
+            fetchDataAll={fetchDataAll}
           />
         }
       />

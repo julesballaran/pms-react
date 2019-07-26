@@ -17,6 +17,7 @@ function App() {
   const [marriage, setMarriage] = useState([])
 
   const fetchDataAll = () => {
+    setLoaded(false)
     axios
       .get('http://localhost:9090/baptismal')
       .then(res => setBaptismal(res.data))
@@ -60,6 +61,7 @@ function App() {
             confirmation={confirmation}
             death={death}
             marriage={marriage}
+            fetchDataAll={fetchDataAll}
             loaded={loaded}
           />
         </div>

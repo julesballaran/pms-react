@@ -35,12 +35,12 @@ const styleCell = {
 
 export default function AllRecords(props){
   const classes = useStyles()
-  const { baptismal, confirmation, death, marriage } = props
+  const { baptismal, confirmation, death, marriage, fetchDataAll } = props
   const [data, setData] = useState({})
   const [modal, setModal] = useState(false)
   const [edit, setEdit] = useState(true)
   const [delDialog, setDelDialog] = useState(false)
-  const [state] = useState({
+  const [state, setState] = useState({
     columns: [
       { title: 'Book', field: 'book', cellStyle: {styleCell}},
       { title: 'Page', field: 'page', cellStyle: {styleCell}},
@@ -54,13 +54,30 @@ export default function AllRecords(props){
   })
 
   const handleEdit = () => {
-    axios.put(`http://localhost:9090/${data.type}/${data.id}`, data)
-    window.location.reload()
+    delete data.tableData
+    axios
+      .put(`http://localhost:9090/${data.type}/${data.id}`, data)
+      .then(res => {
+        const index = state.data.findIndex(d => d.id === data.id && d.type === data.type)
+        const temp = state
+        temp.data.splice(index, 1, res.data)
+        setState(temp)
+        setEdit(true)
+        setModal(false)
+      })
   }
 
   const handleDelete = () => {
-    axios.delete(`http://localhost:9090/${data.type}/${data.id}`)
-    window.location.reload()
+    axios
+      .delete(`http://localhost:9090/${data.type}/${data.id}`)
+      .then(res => {
+        const index = state.data.findIndex(d => d.id === data.id && d.type === data.type)
+        const temp = state
+        temp.data.splice(index, 1)
+        setState(temp)
+        setDelDialog(false)
+        setModal(false)
+      })
   }
 
   return (
