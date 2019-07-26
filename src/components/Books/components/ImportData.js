@@ -95,6 +95,33 @@ export default function ImportData(props) {
 
   const importMarriage = arr => {
     arr.shift()
+    arr.map(data => {
+      axios.post('http://localhost:9090/marriage', {
+        book: selectedBook.bookNo,
+        page: data[0],
+        date: data[1],
+        name: data[2],
+        name2: data[3],
+        age: data[4],
+        age2: data[5],
+        father: data[6],
+        mother: data[7],
+        father2: data[8],
+        mother2: data[9],
+        nationality: data[10],
+        nationality2: data[11],
+        residence: data[12],
+        residence2: data[13],
+        civilstatus: data[14],
+        civilstatus2: data[15],
+        witness: data[16],
+        witness2: data[17],
+        placeofmarriage: data[18],
+        rev: data[19],
+        type: 'marriage',
+      })
+      .finally(()=>setImp(false))
+    })
   }
 
   return (
