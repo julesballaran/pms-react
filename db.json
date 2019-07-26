@@ -60,10 +60,7 @@
       "father": "f1",
       "mother": "mot",
       "date": "2017-05-24",
-      "rev": "father",
-      "tableData": {
-        "id": 1
-      }
+      "rev": "father"
     },
     {
       "id": 2,
@@ -76,6 +73,18 @@
       "mother": "mi",
       "date": "2017-05-24",
       "rev": "father"
+    },
+    {
+      "book": "2",
+      "page": 1,
+      "no": 1,
+      "date": "2017-05-24",
+      "name": "name",
+      "father": "father1",
+      "mother": "mother",
+      "rev": "priest",
+      "type": "confirmation",
+      "id": 3
     }
   ],
   "death": [
@@ -96,10 +105,7 @@
       "dateofdeath": "2017-05-24",
       "causeofdeath": "asds",
       "placeofburial": "asd",
-      "rev": "asds1",
-      "tableData": {
-        "id": 3
-      }
+      "rev": "asds1"
     }
   ],
   "marriage": [

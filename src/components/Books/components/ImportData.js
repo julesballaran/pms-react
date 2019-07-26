@@ -53,19 +53,26 @@ export default function ImportData(props) {
   const importConfirmation = arr => {
     arr.shift()
     arr.map(data => {
-      axios.post('http://localhost:9090/confirmation', {
-        book: selectedBook.bookNo,
-        page: data[0],
-        no: data[1],
-        date: data[2],
-        name: data[3],
-        father: data[4],
-        mother: data[5],
-        rev: data[6],
-        type: 'confirmation',
-      })
-      .finally(()=>setImp(false))
+      axios.get(`http://localhost:9090/confirmation?book=${selectedBook.bookNo}&page=${data[0]}&no=${data[1]}&name=${data[3]}`)
+        .then(res => {
+          if(res.data.length === 0){
+            axios.post('http://localhost:9090/confirmation', {
+              book: selectedBook.bookNo,
+              page: data[0],
+              no: data[1],
+              date: data[2],
+              name: data[3],
+              father: data[4],
+              mother: data[5],
+              rev: data[6],
+              type: 'confirmation',
+            })
+          } else {
+            console.log('error', data)
+          }
+        })
     })
+    setImp(false)
   }
 
   const importDeath = arr => {
