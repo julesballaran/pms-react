@@ -3,7 +3,6 @@ import { BrowserRouter } from 'react-router-dom'
 import background from './img/grid2bg.jpg'
 import './App.css';
 import Header from './components/Header/Header'
-import Sidenav from './components/Sidenav/Sidenav'
 import Routes from './routes'
 import axios from 'axios'
 import Loader from './loader'
@@ -52,9 +51,12 @@ function App() {
   return (
     <BrowserRouter>
       {loaded ?
-      <div style={{display: 'flex', backgroundImage: `url(${background})`, backgroundSize: 'cover'}}>
-        <Sidenav />
-        <div style={{display: 'flex', flexDirection: 'column', maxWidth: 'calc(100% - 240px)', minWidth: 'calc(100% - 240px)',}}>
+        <div style={{
+          display: 'flex', 
+          flexDirection: 'column', 
+          height: 'auto', width: '100%', minHeight: '100vh',
+          backgroundImage: `url(${background})`, 
+          backgroundSize: 'cover'}}>
           <Header />
           <Routes 
             baptismal={baptismal}
@@ -65,7 +67,6 @@ function App() {
             loaded={loaded}
           />
         </div>
-      </div>
       : 
       <Loader text={'fetching data...'}/>
       }

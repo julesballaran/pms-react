@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import {ExcelRenderer, OutTable} from 'react-excel-renderer';
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import {
@@ -21,7 +20,6 @@ export default function DisplayBooks(props) {
   const { bookList, baptismal, confirmation, death, marriage, fetchData } = props
   const [delDialog, setDelDialog] = useState(false)
   const [imp, setImp] = useState(false)
-  const [back, setBack] = useState(false)
   const [delBook, setDelBook] = useState({})
   const [selectedBook, setSelectedBook] = useState({})
 

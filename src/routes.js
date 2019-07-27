@@ -13,7 +13,19 @@ export default function Routes(props) {
   const { baptismal, confirmation, death, marriage, fetchDataAll, loaded } = props
   return (
     <Switch>
-      <Route exact path='/'
+      <Route exact path='/' 
+        render={(props)=>
+          <Books 
+            {...props}
+            baptismal={baptismal}
+            confirmation={confirmation} 
+            death={death}
+            marriage={marriage} 
+            loaded={loaded}
+          />
+        }
+      />
+      <Route path='/all'
         render={(props) =>
           <AllRecords 
             {...props}
@@ -92,18 +104,6 @@ export default function Routes(props) {
         render={(props) => 
           <Marriage  
             {...props} 
-            marriage={marriage} 
-            loaded={loaded}
-          />
-        }
-      />
-      <Route path='/books' 
-        render={(props)=>
-          <Books 
-            {...props}
-            baptismal={baptismal}
-            confirmation={confirmation} 
-            death={death}
             marriage={marriage} 
             loaded={loaded}
           />
