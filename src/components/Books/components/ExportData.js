@@ -44,12 +44,13 @@ export default function ExportData(props) {
 		axios
 			.get(`http://localhost:9090/${b.type}?book=${b.bookNo}`)
 			.then(res => {
-				res.data.map(test => setData(data.push(test)))
+				// res.data.map(test => {
+				// 	setData([...data, test])
+				// })
+				setData([...res.data])
 			})
 			.finally(()=>{
 				setF(true)
-				console.log(data)
-				console.log(dataSet1)
 			})
 	}
 
@@ -66,7 +67,7 @@ export default function ExportData(props) {
 			<Button onClick={handleDownload}>test</Button>
 			{
 				f && b.type === 'baptismal' ?
-					<ExcelFile hideElement={true}>
+					<ExcelFile hideElement={true} filename={`backup-${b.type}-book-${b.bookNo}`}>
 	          <ExcelSheet data={data} name="Employees">
 	            <ExcelColumn label="Page" value="page"/>
 	            <ExcelColumn label="No" value="no"/>
@@ -82,33 +83,59 @@ export default function ExportData(props) {
 	          </ExcelSheet>
 	        </ExcelFile>
 	      : f && b.type === 'confirmation' ?
-	      	<ExcelFile hideElement={true}>
+	      	<ExcelFile hideElement={true} filename={`backup-${b.type}-book-${b.bookNo}`}>
 	          <ExcelSheet data={data} name="Employees">
+	            <ExcelColumn label="Page" value="page"/>
+	            <ExcelColumn label="No" value="no"/>
+	            <ExcelColumn label="Date" value="date"/>
 	            <ExcelColumn label="Name" value="name"/>
-	            <ExcelColumn label="Wallet Money" value="amount"/>
-	            <ExcelColumn label="Gender" value="sex"/>
-	            <ExcelColumn label="Marital Status"
-	             	value={(col) => col.is_married ? "Married" : "Single"}/>
+	            <ExcelColumn label="Father" value="father"/>
+	            <ExcelColumn label="Mother" value="mother"/>
+	            <ExcelColumn label="Priest" value="rev"/>
 	          </ExcelSheet>
 	        </ExcelFile>
 	      : f && b.type === 'death' ?
-	      	<ExcelFile hideElement={true}>
+	      	<ExcelFile hideElement={true} filename={`backup-${b.type}-book-${b.bookNo}`}>
 	          <ExcelSheet data={data} name="Employees">
+	            <ExcelColumn label="Page" value="page"/>
+	            <ExcelColumn label="Date" value="date"/>
 	            <ExcelColumn label="Name" value="name"/>
-	            <ExcelColumn label="Wallet Money" value="amount"/>
-	            <ExcelColumn label="Gender" value="sex"/>
-	            <ExcelColumn label="Marital Status"
-	             	value={(col) => col.is_married ? "Married" : "Single"}/>
+	            <ExcelColumn label="Age" value="age"/>
+	            <ExcelColumn label="Father" value="father"/>
+	            <ExcelColumn label="Mother" value="mother"/>
+	            <ExcelColumn label="Spouse" value="spouse"/>
+	            <ExcelColumn label="Nationality" value="nationality"/>
+	            <ExcelColumn label="Residence" value="residence"/>
+	            <ExcelColumn label="Civil Status" value="civilstatus"/>
+	            <ExcelColumn label="Date of Death" value="dateofdeath"/>
+	            <ExcelColumn label="Cause of Death" value="causeofdeath"/>
+	            <ExcelColumn label="Place of Burial" value="placeofburial"/>
+	            <ExcelColumn label="Priest" value="rev"/>
 	          </ExcelSheet>
 	        </ExcelFile>
 	      : f && b.type === 'marriage' ?
-	      	<ExcelFile hideElement={true}>
+	      	<ExcelFile hideElement={true} filename={`backup-${b.type}-book-${b.bookNo}`}>
 	          <ExcelSheet data={data} name="Employees">
-	            <ExcelColumn label="Name" value="name"/>
-	            <ExcelColumn label="Wallet Money" value="amount"/>
-	            <ExcelColumn label="Gender" value="sex"/>
-	            <ExcelColumn label="Marital Status"
-	             	value={(col) => col.is_married ? "Married" : "Single"}/>
+	            <ExcelColumn label="Page" value="page"/>
+	            <ExcelColumn label="Date" value="date"/>
+	            <ExcelColumn label="Name 1" value="name"/>
+	            <ExcelColumn label="Name 2" value="name2"/>
+	            <ExcelColumn label="Age 1" value="age"/>
+	            <ExcelColumn label="Age 2" value="age2"/>
+	            <ExcelColumn label="Father 1" value="father"/>
+	            <ExcelColumn label="Mother 1" value="mother"/>
+	            <ExcelColumn label="Father 2" value="father2"/>
+	            <ExcelColumn label="Mother 2" value="mother2"/>
+	            <ExcelColumn label="Nationality 1" value="nationality"/>
+	            <ExcelColumn label="Nationality 2" value="nationality2"/>
+	            <ExcelColumn label="Residence 1" value="residence"/>
+	            <ExcelColumn label="Residence 2" value="residence2"/>
+	            <ExcelColumn label="Civil Status 1" value="civilstatus"/>
+	            <ExcelColumn label="Civil Status 2" value="civilstatus2"/>
+	            <ExcelColumn label="Witness 1" value="witness"/>
+	            <ExcelColumn label="Witness 2" value="witness2"/>
+	            <ExcelColumn label="Place of Marriage" value="placeofmarriage"/>
+	            <ExcelColumn label="Priest" value="rev"/>
 	          </ExcelSheet>
 	        </ExcelFile>
         : null
