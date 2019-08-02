@@ -13,8 +13,10 @@
     "material-table": "^1.40.0",
     "pizzip": "^3.0.4",
     "react": "^16.8.6",
+    "react-data-export": "^0.5.0",
     "react-dom": "^16.8.6",
     "react-excel-renderer": "^1.1.0",
+    "react-export-excel": "^0.5.3",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1"
   },

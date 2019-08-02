@@ -30,7 +30,7 @@ const styleCell = {
 
 export default function Confirmation(props) {
   const classes = useStyles()
-  const { confirmation, loaded } = props
+  const { confirmation, loaded, setEdited } = props
   const [data, setData] = useState({})
   const [modal, setModal] = useState(false)
   const [edit, setEdit] = useState(true)
@@ -68,6 +68,7 @@ export default function Confirmation(props) {
         setState(temp)
         setEdit(true)
         setModal(false)
+        setEdited(true)
       })
   }
 
@@ -81,6 +82,7 @@ export default function Confirmation(props) {
         setState(temp)
         setDelDialog(false)
         setModal(false)
+        setEdited(true)
       })
   }
 

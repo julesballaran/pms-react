@@ -17,7 +17,6 @@ import DisplayBooks from './components/DisplayBooks'
 const useStyles = makeStyles({
   btnStyle: {
     width: 150,
-    height: 35,
     display: 'flex',
     margin: '15px 10px 0 10px',
     fontSize: 15,
@@ -33,15 +32,18 @@ const useStyles = makeStyles({
 
 
 export default function Books(props){
-  const { confirmation, baptismal, death, marriage, loaded } = props
+  const { confirmation, baptismal, death, marriage, loaded, edited } = props
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [type, setType] = useState('')
-  const [bookName, setBookName] = useState('')
   const [bookNo, setBookNo] = useState('')
   const [bookList, setBookList] = useState([])
+  const [errAdd, setErrAdd] = useState(false)
   
   useEffect(() => {
+      if(edited) {
+        window.location.reload()
+      }
       if(!loaded){
         props.history.push('/');
       } else {
@@ -60,21 +62,28 @@ export default function Books(props){
     e.preventDefault()
     if(type){
       axios
-        .post('http://localhost:9090/books', {
-          bookName,
-          bookNo,
-          type,
-        })
-        .then(()=>{
-            setOpen(false)
-            fetchData()
+        .get(`http://localhost:9090/books?bookNo=${bookNo}&type=${type}`)
+        .then(f => {
+          if(!f){
+            axios
+              .post('http://localhost:9090/books', {
+                bookNo,
+                type,
+              })
+              .then(res=>{
+                  setOpen(false)
+                  setBookList([...bookList, res.data])
+                }
+              )
+          } else {
+            setErrAdd(true)
           }
-        )
+        })
     }
   }
 
   return (
-    <React.Fragment>
+    <Grid container style={{padding: '0 50px'}}>
       <Grid container wrap='nowrap' justify='flex-end'>
         <Button 
           className={classes.btnStyle}
@@ -99,19 +108,16 @@ export default function Books(props){
             <TextField
               style={{width: '80%'}}
               required
-              label="Book Name"
-              value={bookName}
-              margin="normal"
-              onChange={e => setBookName(e.target.value)}
-            />
-            <TextField
-              style={{width: '80%'}}
-              required
               label="Book Number"
               type="number"
               value={bookNo}
               margin="normal"
-              onChange={e => setBookNo(e.target.value)}
+              onChange={e => {
+                setErrAdd(false)
+                setBookNo(e.target.value)
+              }}
+              error={errAdd}
+              helperText={errAdd ? `Book ${bookNo} already added` : ''}
             />
             <InputLabel style={{width: '80%'}}>Type: 
               <Select
@@ -132,6 +138,6 @@ export default function Books(props){
           </div>
         </form>
       </Dialog>
-    </React.Fragment>
+    </Grid>
   )
 }

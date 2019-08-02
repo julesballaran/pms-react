@@ -1,34 +1,29 @@
 {
   "books": [
     {
-      "bookName": "Book 1",
       "bookNo": "1",
       "type": "baptismal",
       "id": 1
     },
     {
-      "bookName": "Book 2",
-      "bookNo": "2",
-      "type": "confirmation",
-      "id": 2
-    },
-    {
-      "bookName": "Book 3",
       "bookNo": "3",
       "type": "confirmation",
       "id": 3
     },
     {
-      "bookName": "Book 1",
       "bookNo": "1",
       "type": "death",
       "id": 4
     },
     {
-      "bookName": "Book 1",
       "bookNo": "1",
       "type": "marriage",
       "id": 5
+    },
+    {
+      "bookNo": "2",
+      "type": "death",
+      "id": 6
     }
   ],
   "baptismal": [
@@ -36,7 +31,7 @@
       "id": 1,
       "book": "1",
       "type": "baptismal",
-      "page": "2",
+      "page": "22",
       "no": "11",
       "name": "b12",
       "father": "f21",
@@ -51,18 +46,6 @@
   ],
   "confirmation": [
     {
-      "id": 1,
-      "book": "2",
-      "type": "confirmation",
-      "page": 1,
-      "no": 1,
-      "name": "c",
-      "father": "f1",
-      "mother": "mot",
-      "date": "2017-05-24",
-      "rev": "father"
-    },
-    {
       "id": 2,
       "book": "3",
       "type": "confirmation",
@@ -73,18 +56,6 @@
       "mother": "mi",
       "date": "2017-05-24",
       "rev": "father"
-    },
-    {
-      "book": "2",
-      "page": 1,
-      "no": 1,
-      "date": "2017-05-24",
-      "name": "name",
-      "father": "father1",
-      "mother": "mother",
-      "rev": "priest",
-      "type": "confirmation",
-      "id": 3
     }
   ],
   "death": [
@@ -106,6 +77,78 @@
       "causeofdeath": "asds",
       "placeofburial": "asd",
       "rev": "asds1"
+    },
+    {
+      "book": "1",
+      "page": 1,
+      "date": 1,
+      "name": "2017-05-24",
+      "age": "name",
+      "father": "father1",
+      "mother": "mother",
+      "spouse": "priest",
+      "type": "death",
+      "id": 2
+    },
+    {
+      "book": "1",
+      "page": 1,
+      "date": 1,
+      "name": "2017-05-25",
+      "age": "name",
+      "father": "father2",
+      "mother": "mother",
+      "spouse": "priest",
+      "type": "death",
+      "id": 3
+    },
+    {
+      "book": "1",
+      "page": 1,
+      "date": 1,
+      "name": "2017-05-26",
+      "age": "name",
+      "father": "father3",
+      "mother": "mother",
+      "spouse": "priest",
+      "type": "death",
+      "id": 4
+    },
+    {
+      "book": "1",
+      "page": 1,
+      "date": 1,
+      "name": "2017-05-27",
+      "age": "name",
+      "father": "father4",
+      "mother": "mother",
+      "spouse": "priest",
+      "type": "death",
+      "id": 5
+    },
+    {
+      "book": "1",
+      "page": 1,
+      "date": 1,
+      "name": "2017-05-28",
+      "age": "name",
+      "father": "father5",
+      "mother": "mother",
+      "spouse": "priest",
+      "type": "death",
+      "id": 6
+    },
+    {
+      "book": "1",
+      "page": 1,
+      "date": 1,
+      "name": "2017-05-29",
+      "age": "name",
+      "father": "father6",
+      "mother": "mother",
+      "spouse": "priest",
+      "type": "death",
+      "id": 7
     }
   ],
   "marriage": [
@@ -122,7 +165,7 @@
       "mother2": "m",
       "age": "100",
       "age2": "100",
-      "nationality": "f",
+      "nationality": "ff",
       "nationality2": "f",
       "residence": "asd",
       "residence2": "asd",
@@ -132,7 +175,10 @@
       "witness2": "Aasdasd",
       "date": "2017-05-24",
       "placeofmarriage": "asd1",
-      "rev": "asds"
+      "rev": "asds",
+      "tableData": {
+        "id": 0
+      }
     }
   ]
 }

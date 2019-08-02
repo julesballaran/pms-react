@@ -7,14 +7,15 @@ import {
   Tooltip,
   Dialog,
   Button,
-} from '@material-ui/core/';
+} from '@material-ui/core/'
 import {
   Book,
   Delete,
   Unarchive,
   Archive
-} from '@material-ui/icons/';
+} from '@material-ui/icons/'
 import ImportData from './ImportData'
+import ExportData from './ExportData'
 
 export default function DisplayBooks(props) {
   const { bookList, baptismal, confirmation, death, marriage, fetchData } = props
@@ -22,6 +23,8 @@ export default function DisplayBooks(props) {
   const [imp, setImp] = useState(false)
   const [delBook, setDelBook] = useState({})
   const [selectedBook, setSelectedBook] = useState({})
+  const [exp, setExp] = useState(false)
+  const [b, setB] = useState({})
 
   const removeBook = (book) => {
     axios
@@ -39,6 +42,11 @@ export default function DisplayBooks(props) {
       })
   }
 
+  const handleExport = book => {
+    setExp(true)
+    setB(book)
+  }
+
   return (
     <Grid
       container
@@ -49,7 +57,7 @@ export default function DisplayBooks(props) {
           <Paper className='papel'>
           <Link className='book-style' to={`${book.type}/${book.bookNo}`} style={{textDecoration: 'none'}}>
             <Book style={{fontSize: 100,}}/>
-            <h4>{book.bookName}</h4>
+            <h4>Book {book.bookNo}</h4>
             <p>{book.type}</p>
             <EntryCount 
               no={book.bookNo}
@@ -66,7 +74,7 @@ export default function DisplayBooks(props) {
                 <Unarchive onClick={()=>setImp(true)}/>
               </Tooltip>
               <Tooltip title="Backup">
-                <Archive />
+                <Archive onClick={() => handleExport(book)}/>
               </Tooltip>
               <Tooltip title="Delete">
                 <Delete onClick={()=>{
@@ -83,7 +91,7 @@ export default function DisplayBooks(props) {
         onClose={()=>setDelDialog(false)}
         className='del-dialog'
       >
-        <h3>Delete {delBook.bookName}?</h3>
+        <h3>Delete Book {delBook.bookNo}?</h3>
         <div className='del-dialog-btn'>
           <Button variant='contained' onClick={()=> setDelDialog(false)}>Cancel</Button>  
           <Button variant='contained' color='secondary' onClick={()=>removeBook(delBook)}>Delete</Button> 
@@ -93,7 +101,13 @@ export default function DisplayBooks(props) {
         imp={imp}
         setImp={setImp}
         selectedBook={selectedBook}
+        fetchData={fetchData}
       />
+      {
+        exp ?
+          <ExportData setExp={setExp} b={b}/>
+        : null
+      }
     </Grid>
   )
 }

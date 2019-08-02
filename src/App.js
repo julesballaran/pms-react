@@ -14,6 +14,7 @@ function App() {
   const [confirmation, setConfirmation] = useState([])
   const [death, setDeath] = useState([])
   const [marriage, setMarriage] = useState([])
+  const [edited, setEdited] = useState(false)
 
   const fetchDataAll = () => {
     setLoaded(false)
@@ -65,6 +66,8 @@ function App() {
             marriage={marriage}
             fetchDataAll={fetchDataAll}
             loaded={loaded}
+            edited={edited}
+            setEdited={setEdited}
           />
         </div>
       : 

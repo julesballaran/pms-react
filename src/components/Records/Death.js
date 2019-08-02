@@ -30,7 +30,7 @@ const styleCell = {
 
 export default function Death(props){
   const classes = useStyles()
-  const { death, loaded } = props
+  const { death, loaded, setEdited } = props
   const [data, setData] = useState({})
   const [modal, setModal] = useState(false)
   const [edit, setEdit] = useState(true)
@@ -69,6 +69,7 @@ export default function Death(props){
         setState(temp)
         setEdit(true)
         setModal(false)
+        setEdited(true)
       })
   }
 
@@ -82,6 +83,7 @@ export default function Death(props){
         setState(temp)
         setDelDialog(false)
         setModal(false)
+        setEdited(true)
       })
   }
 

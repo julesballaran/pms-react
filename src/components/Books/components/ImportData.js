@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import {
   Dialog,
   Button,
+  CircularProgress,
+  Grid,
 } from '@material-ui/core/';
 import { ExcelRenderer } from 'react-excel-renderer'
 
 export default function ImportData(props) {
   const { imp, setImp, selectedBook } = props
+  const [done, setDone] = useState(false)
+  const [load, setLoad] = useState(false)
+  const [error, setError] = useState([])
   
   const handleFile = e => {
     const file = e.target.files[0]
@@ -52,7 +57,8 @@ export default function ImportData(props) {
 
   const importConfirmation = arr => {
     arr.shift()
-    arr.map(data => {
+    let count  = arr.length
+    arr.map((data, i) => {
       axios.get(`http://localhost:9090/confirmation?book=${selectedBook.bookNo}&page=${data[0]}&no=${data[1]}&name=${data[3]}`)
         .then(res => {
           if(res.data.length === 0){
@@ -67,11 +73,23 @@ export default function ImportData(props) {
               rev: data[6],
               type: 'confirmation',
             })
+            .then(()=>{
+              if(i === count-1){
+                setLoad(false)
+                setDone(true)
+              }
+            })
           } else {
-            console.log('error', data)
+            setError(error.push([data[0], data[3]]))
+            if(i === count-1){
+              setLoad(false)
+              setDone(true)
+            }
           }
+          setError(error)
         })
     })
+    setLoad(true)
     setImp(false)
   }
 
@@ -132,22 +150,51 @@ export default function ImportData(props) {
   }
 
   return (
-    <Dialog
-      open={imp}
-      onClose={()=>setImp(false)}
-    >
-      <Button
-        variant="contained"
-        component="label"
-        style={{margin: 30}}
+    <React.Fragment>
+      <Dialog
+        open={imp}
+        onClose={()=>setImp(false)}
       >
-        Upload File
-        <input
-          type="file"
-          style={{ display: "none" }}
-          onChange={e => handleFile(e)}
-        />
-      </Button>
-    </Dialog>
+        <Button
+          variant="contained"
+          component="label"
+          style={{margin: 30}}
+        >
+          Upload File
+          <input
+            type="file"
+            style={{ display: "none" }}
+            onChange={e => handleFile(e)}
+          />
+        </Button>
+      </Dialog>
+      {
+        done && error.length ?
+          <Dialog open={done} onClose={() => window.location.reload()}>
+            <Grid container justify="center" direction="column" style={{padding: 20, width: 350}}>
+              <div>
+                <h3 style={{color: 'red', textAlign: "center"}}>{error.length} Invalid Input</h3>
+                {error.map((r, i) => (
+                  <p key={i}>Page: <i style={{color: 'red'}}>{r[0]}</i>   Name: <i style={{color: 'red'}}>{r[1]}</i></p>
+                ))} 
+              </div>
+              <Button variant="contained" color="primary" onClick={() => console.log(error)}>Confirm</Button>
+            </Grid>
+          </Dialog>
+        : done && error.length === 0 ?
+          <Dialog open={done} onClose={() => window.location.reload()}>
+            <Grid container justify="center" direction="column" style={{padding: 20, width: 350}}>
+              <div>
+                <h3 style={{color: 'green', textAlign: "center"}}>Imported</h3>
+              </div>
+              <Button variant="contained" color="primary" onClick={() => console.log(error)}>Confirm</Button>
+            </Grid>
+          </Dialog>
+        : null
+      }
+      <Dialog open={load} onClose={() => setLoad(true)}>
+        <CircularProgress />
+      </Dialog>
+    </React.Fragment>
   )
 }

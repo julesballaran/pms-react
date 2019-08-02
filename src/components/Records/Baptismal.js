@@ -32,7 +32,7 @@ const styleCell = {
 
 export default function Baptismal(props){
   const classes = useStyles()
-  const { baptismal, loaded } = props
+  const { baptismal, loaded, setEdited } = props
   const [data, setData] = useState({})
   const [modal, setModal] = useState(false)
   const [edit, setEdit] = useState(true)
@@ -71,6 +71,7 @@ export default function Baptismal(props){
         setState(temp)
         setEdit(true)
         setModal(false)
+        setEdited(true)
       })
   }
 
@@ -84,6 +85,7 @@ export default function Baptismal(props){
         setState(temp)
         setDelDialog(false)
         setModal(false)
+        setEdited(true)
       })
   }
 

@@ -35,7 +35,7 @@ const styleCell = {
 
 export default function AllRecords(props){
   const classes = useStyles()
-  const { baptismal, confirmation, death, marriage, fetchDataAll } = props
+  const { baptismal, confirmation, death, marriage, fetchDataAll, setEdited } = props
   const [data, setData] = useState({})
   const [modal, setModal] = useState(false)
   const [edit, setEdit] = useState(true)
@@ -64,6 +64,7 @@ export default function AllRecords(props){
         setState(temp)
         setEdit(true)
         setModal(false)
+        setEdited(true)
       })
   }
 
@@ -77,6 +78,7 @@ export default function AllRecords(props){
         setState(temp)
         setDelDialog(false)
         setModal(false)
+        setEdited(true)
       })
   }
 
