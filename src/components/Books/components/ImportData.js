@@ -9,12 +9,18 @@ import {
 import { ExcelRenderer } from 'react-excel-renderer'
 
 export default function ImportData(props) {
-  const { imp, setImp, selectedBook } = props
+  const { imp, setImp, selectedBook, baptismal, confirmation } = props
   const [done, setDone] = useState(false)
   const [load, setLoad] = useState(false)
   const [error, setError] = useState([])
+  const [sec, setSec] = useState(0)
+  const [current, setCurrent] = useState('')
   
   const handleFile = e => {
+
+    setImp(false)
+    setLoad(true)
+
     const file = e.target.files[0]
     ExcelRenderer(file, (err, res) => {
       if(err){
@@ -36,61 +42,64 @@ export default function ImportData(props) {
   const importBaptismal = arr => {
     arr.shift()
     arr.map(data => {
-      axios.post('http://localhost:9090/baptismal', {
-        book: selectedBook.bookNo,
-        page: data[0],
-        no: data[1],
-        date: data[2],
-        name: data[3],
-        father: data[4],
-        mother: data[5],
-        birthdate: data[6],
-        birthplace: data[7],
-        sponsor1: data[8],
-        sponsor2: data[9],
-        rev: data[10],
-        type: 'baptismal',
-      })
-      .finally(()=>setImp(false))
+      axios.get(`http://localhost:9090/confirmation?book=${selectedBook.bookNo}&page=${data[0]}&no=${data[1]}&name=${data[3]}`)
+        .then(res => console.log(res))
+      // axios.post('http://localhost:9090/baptismal', {
+      //   book: selectedBook.bookNo,
+      //   page: data[0],
+      //   no: data[1],
+      //   date: data[2],
+      //   name: data[3],
+      //   father: data[4],
+      //   mother: data[5],
+      //   birthdate: data[6],
+      //   birthplace: data[7],
+      //   sponsor1: data[8],
+      //   sponsor2: data[9],
+      //   rev: data[10],
+      //   type: 'baptismal',
+      // })
+      // .finally(()=>setImp(false))
     })
   }
 
   const importConfirmation = arr => {
     arr.shift()
+    let test = [], d
     let count  = arr.length
     arr.map((data, i) => {
-      axios.get(`http://localhost:9090/confirmation?book=${selectedBook.bookNo}&page=${data[0]}&no=${data[1]}&name=${data[3]}`)
-        .then(res => {
-          if(res.data.length === 0){
-            axios.post('http://localhost:9090/confirmation', {
-              book: selectedBook.bookNo,
-              page: data[0],
-              no: data[1],
-              date: data[2],
-              name: data[3],
-              father: data[4],
-              mother: data[5],
-              rev: data[6],
-              type: 'confirmation',
-            })
-            .then(()=>{
-              if(i === count-1){
-                setLoad(false)
-                setDone(true)
-              }
-            })
-          } else {
-            setError(error.push([data[0], data[3]]))
-            if(i === count-1){
+      if(!confirmation.find(c => c.book === selectedBook.bookNo && c.page === data[0] && c.no === data[1] && c.name === data[3])){
+        d = {
+          book: selectedBook.bookNo,
+          page: data[0],
+          no: data[1],
+          date: data[2],
+          name: data[3],
+          father: data[4],
+          mother: data[5],
+          rev: data[6],
+          type: 'confirmation',
+        }
+        test.push(d)
+      } else {
+        setError(error.push([data[0], data[3]]))
+      }
+      if(i === count-1){
+        test.map((t, i) => {
+          setTimeout(()=>{
+            setSec(test.length - i)
+            setCurrent(t.name)
+            axios.post('http://localhost:9090/confirmation', t)
+              .catch(()=>setError(error.push([data[0], data[3]])))
+            if(test.length-1 === i){
               setLoad(false)
               setDone(true)
             }
-          }
-          setError(error)
+          }, i * 1000)
         })
+      }
+      setError(error)
     })
-    setLoad(true)
-    setImp(false)
   }
 
   const importDeath = arr => {
@@ -193,7 +202,11 @@ export default function ImportData(props) {
         : null
       }
       <Dialog open={load} onClose={() => setLoad(true)}>
-        <CircularProgress />
+        <Grid container direction="column" justify="center" alignItems="center" style={{height: 200, width: 500}}>
+          <p>adding {current} ...</p>
+          <CircularProgress />
+          <p>{sec}</p>
+        </Grid>
       </Dialog>
     </React.Fragment>
   )

@@ -6,11 +6,6 @@
       "id": 1
     },
     {
-      "bookNo": "3",
-      "type": "confirmation",
-      "id": 3
-    },
-    {
       "bookNo": "1",
       "type": "death",
       "id": 4
@@ -24,6 +19,11 @@
       "bookNo": "2",
       "type": "death",
       "id": 6
+    },
+    {
+      "bookNo": "2",
+      "type": "marriage",
+      "id": 7
     }
   ],
   "baptismal": [
@@ -31,7 +31,7 @@
       "id": 1,
       "book": "1",
       "type": "baptismal",
-      "page": "22",
+      "page": "222",
       "no": "11",
       "name": "b12",
       "father": "f21",
@@ -44,44 +44,7 @@
       "sponsor2": "asdasd2"
     }
   ],
-  "confirmation": [
-    {
-      "id": 2,
-      "book": "3",
-      "type": "confirmation",
-      "page": "12",
-      "no": 1,
-      "name": "c1",
-      "father": "f",
-      "mother": "mi",
-      "date": "2017-05-24",
-      "rev": "father"
-    },
-    {
-      "book": "3",
-      "page": 1,
-      "no": 1,
-      "date": "2017-05-24",
-      "name": "name",
-      "father": "father1",
-      "mother": "mother",
-      "rev": "priest",
-      "type": "confirmation",
-      "id": 3
-    },
-    {
-      "book": "3",
-      "page": 1,
-      "no": 1,
-      "date": "2017-05-25",
-      "name": "name",
-      "father": "father2",
-      "mother": "mother",
-      "rev": "priest",
-      "type": "confirmation",
-      "id": 4
-    }
-  ],
+  "confirmation": [],
   "death": [
     {
       "id": 1,

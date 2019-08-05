@@ -35,7 +35,11 @@ export default function DisplayBooks(props) {
   const removeEntries = (type, no) => {
     axios
     .get(`http://localhost:9090/${type}?book=${no}`)
-      .then(res => res.data.map(e => axios.delete(`http://localhost:9090/${type}/${e.id}`)))
+      .then(res => res.data.map((e, i)=> {
+        setTimeout(()=>{
+          axios.delete(`http://localhost:9090/${type}/${e.id}`)
+        }, i * 100)
+      }))
       .finally(()=>{
         fetchData()
         setDelDialog(false)
@@ -137,7 +141,8 @@ export default function DisplayBooks(props) {
         imp={imp}
         setImp={setImp}
         selectedBook={selectedBook}
-        fetchData={fetchData}
+        baptismal={baptismal}
+        confirmation={confirmation}
       />
       {
         exp ?

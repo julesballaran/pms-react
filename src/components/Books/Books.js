@@ -63,31 +63,27 @@ export default function Books(props){
   function handleSubmit(e){
     e.preventDefault()
     if(type){
-      axios
-        .get(`http://localhost:9090/books?bookNo=${bookNo}&type=${type}`)
-        .then(f => {
-          if(!f){
-            axios
-              .post('http://localhost:9090/books', {
-                bookNo,
-                type,
-              })
-              .then(res=>{
-                  setOpen(false)
-                  setBookList([...bookList, res.data])
-                }
-              )
-          } else {
-            setErrAdd(true)
-          }
-        })
+      if(!bookList.find(b => b.bookNo === bookNo && b.type === type)){
+        setErrAdd(false)
+        axios
+          .post('http://localhost:9090/books', {
+            bookNo,
+            type,
+          })
+          .then(res=>{
+            setOpen(false)
+            setBookList([...bookList, res.data])
+          })
+      } else {
+        setErrAdd(true)
+      }
     }
   }
 
   return (
     <Grid container wrap='nowrap' direction="column" style={{padding: '0 50px'}}>
       <Grid container style={{marginTop: 10}}>
-        <Grid wrap='nowrap'>
+        <Grid>
           <FormControl>
             <InputLabel htmlFor="type">Type</InputLabel>
             <Select
@@ -105,7 +101,7 @@ export default function Books(props){
             </Select>
           </FormControl>
         </Grid>
-        <Grid style={{marginLeft: 'auto'}} justify='flex-end'>
+        <Grid style={{marginLeft: 'auto'}}>
           <Button 
             className={classes.btnStyle}
             onClick={() => setOpen(true)}
