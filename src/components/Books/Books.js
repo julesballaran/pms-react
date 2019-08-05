@@ -9,6 +9,7 @@ import {
   TextField,
   Button,
   Grid,
+  FormControl,
 } from '@material-ui/core/';
 
 
@@ -39,6 +40,7 @@ export default function Books(props){
   const [bookNo, setBookNo] = useState('')
   const [bookList, setBookList] = useState([])
   const [errAdd, setErrAdd] = useState(false)
+  const [type2, setType2] = useState('all')
   
   useEffect(() => {
       if(edited) {
@@ -83,15 +85,36 @@ export default function Books(props){
   }
 
   return (
-    <Grid container style={{padding: '0 50px'}}>
-      <Grid container wrap='nowrap' justify='flex-end'>
-        <Button 
-          className={classes.btnStyle}
-          onClick={() => setOpen(true)}
-        >Add Book
-        </Button>
+    <Grid container wrap='nowrap' direction="column" style={{padding: '0 50px'}}>
+      <Grid container style={{marginTop: 10}}>
+        <Grid wrap='nowrap'>
+          <FormControl>
+            <InputLabel htmlFor="type">Type</InputLabel>
+            <Select
+              style={{width: 200}}
+              value={type2}
+              onChange={e => setType2(e.target.value)}
+              label="type"
+              id="type"
+            >
+              <MenuItem value='all'>All</MenuItem>
+              <MenuItem value='baptismal'>Baptismal</MenuItem>
+              <MenuItem value='confirmation'>Confirmation</MenuItem>
+              <MenuItem value='death'>Death</MenuItem>
+              <MenuItem value='marriage'>Marriage</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid style={{marginLeft: 'auto'}} justify='flex-end'>
+          <Button 
+            className={classes.btnStyle}
+            onClick={() => setOpen(true)}
+          >Add Book
+          </Button>
+        </Grid>
       </Grid>
-      <DisplayBooks 
+      <DisplayBooks
+        type={type2}
         bookList={bookList}
         confirmation={confirmation}
         baptismal={baptismal}

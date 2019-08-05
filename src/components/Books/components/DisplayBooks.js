@@ -18,7 +18,7 @@ import ImportData from './ImportData'
 import ExportData from './ExportData'
 
 export default function DisplayBooks(props) {
-  const { bookList, baptismal, confirmation, death, marriage, fetchData } = props
+  const { bookList, baptismal, confirmation, death, marriage, fetchData, type } = props
   const [delDialog, setDelDialog] = useState(false)
   const [imp, setImp] = useState(false)
   const [delBook, setDelBook] = useState({})
@@ -53,38 +53,74 @@ export default function DisplayBooks(props) {
       direction="row"
     >
       {bookList.map(book => (
-        <Grid key={book.id} style={{margin: 20}}>
-          <Paper className='papel'>
-          <Link className='book-style' to={`${book.type}/${book.bookNo}`} style={{textDecoration: 'none'}}>
-            <Book style={{fontSize: 100,}}/>
-            <h4>Book {book.bookNo}</h4>
-            <p>{book.type}</p>
-            <EntryCount 
-              no={book.bookNo}
-              book={
-                book.type === 'baptismal' ? baptismal 
-                : book.type === 'confirmation' ? confirmation 
-                : book.type === 'death' ? death 
-                : marriage
-              }
-            />
-            </Link>
-            <div className='actions' onClick={()=> setSelectedBook(book)}>
-              <Tooltip title="Import">
-                <Unarchive onClick={()=>setImp(true)}/>
-              </Tooltip>
-              <Tooltip title="Backup">
-                <Archive onClick={() => handleExport(book)}/>
-              </Tooltip>
-              <Tooltip title="Delete">
-                <Delete onClick={()=>{
-                  setDelBook(book)
-                  setDelDialog(true)
-                }}/>
-              </Tooltip>
-            </div>
-          </Paper>
-        </Grid>
+        book.type.match(type) ?
+          <Grid key={book.id} style={{margin: 20}}>
+            <Paper className='papel'>
+            <Link className='book-style' to={`${book.type}/${book.bookNo}`} style={{textDecoration: 'none'}}>
+              <Book style={{fontSize: 100,}}/>
+              <h4>Book {book.bookNo}</h4>
+              <p>{book.type}</p>
+              <EntryCount 
+                no={book.bookNo}
+                book={
+                  book.type === 'baptismal' ? baptismal 
+                  : book.type === 'confirmation' ? confirmation 
+                  : book.type === 'death' ? death 
+                  : marriage
+                }
+              />
+              </Link>
+              <div className='actions' onClick={()=> setSelectedBook(book)}>
+                <Tooltip title="Import">
+                  <Unarchive onClick={()=>setImp(true)}/>
+                </Tooltip>
+                <Tooltip title="Backup">
+                  <Archive onClick={() => handleExport(book)}/>
+                </Tooltip>
+                <Tooltip title="Delete">
+                  <Delete onClick={()=>{
+                    setDelBook(book)
+                    setDelDialog(true)
+                  }}/>
+                </Tooltip>
+              </div>
+            </Paper>
+          </Grid>
+          : type === 'all' ?
+          <Grid key={book.id} style={{margin: 20}}>
+            <Paper className='papel'>
+            <Link className='book-style' to={`${book.type}/${book.bookNo}`} style={{textDecoration: 'none'}}>
+              <Book style={{fontSize: 100,}}/>
+              <h4>Book {book.bookNo}</h4>
+              <p>{book.type}</p>
+              <EntryCount 
+                no={book.bookNo}
+                book={
+                  book.type === 'baptismal' ? baptismal 
+                  : book.type === 'confirmation' ? confirmation 
+                  : book.type === 'death' ? death 
+                  : marriage
+                }
+              />
+              </Link>
+              <div className='actions' onClick={()=> setSelectedBook(book)}>
+                <Tooltip title="Import">
+                  <Unarchive onClick={()=>setImp(true)}/>
+                </Tooltip>
+                <Tooltip title="Backup">
+                  <Archive onClick={() => handleExport(book)}/>
+                </Tooltip>
+                <Tooltip title="Delete">
+                  <Delete onClick={()=>{
+                    setDelBook(book)
+                    setDelDialog(true)
+                  }}/>
+                </Tooltip>
+              </div>
+            </Paper>
+          </Grid>
+          : null
+
       ))}
       <Dialog 
         open={delDialog}

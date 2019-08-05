@@ -178,7 +178,7 @@ export default function ImportData(props) {
                   <p key={i}>Page: <i style={{color: 'red'}}>{r[0]}</i>   Name: <i style={{color: 'red'}}>{r[1]}</i></p>
                 ))} 
               </div>
-              <Button variant="contained" color="primary" onClick={() => console.log(error)}>Confirm</Button>
+              <Button variant="contained" color="primary" onClick={() => window.location.reload()}>Confirm</Button>
             </Grid>
           </Dialog>
         : done && error.length === 0 ?
@@ -187,7 +187,7 @@ export default function ImportData(props) {
               <div>
                 <h3 style={{color: 'green', textAlign: "center"}}>Imported</h3>
               </div>
-              <Button variant="contained" color="primary" onClick={() => console.log(error)}>Confirm</Button>
+              <Button variant="contained" color="primary" onClick={() => window.location.reload()}>Confirm</Button>
             </Grid>
           </Dialog>
         : null
