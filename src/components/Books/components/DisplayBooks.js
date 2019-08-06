@@ -7,12 +7,13 @@ import {
   Tooltip,
   Dialog,
   Button,
+  CircularProgress,
 } from '@material-ui/core/'
 import {
   Book,
   Delete,
   Unarchive,
-  Archive
+  Archive,
 } from '@material-ui/icons/'
 import ImportData from './ImportData'
 import ExportData from './ExportData'
@@ -25,11 +26,42 @@ export default function DisplayBooks(props) {
   const [selectedBook, setSelectedBook] = useState({})
   const [exp, setExp] = useState(false)
   const [b, setB] = useState({})
+  const [rem, setRem] = useState(0)
+  const [load, setLoad] = useState(false)
+  const [done, setDone] = useState(false)
 
   const removeBook = (book) => {
+    setDelDialog(false)
+    setLoad(true)
     axios
-      .delete(`http://localhost:9090/books/${book.id}`)
-      .then(() => removeEntries(book.type, book.bookNo))
+    .get(`http://localhost:9090/${book.type}?book=${book.bookNo}`)
+      .then(res => {
+        res.data.map((e, i)=> {
+          setTimeout(()=>{
+            axios.delete(`http://localhost:9090/${e.type}/${e.id}`)
+              .then(() => {
+                setRem(res.data.length - i)
+              })
+
+            if(res.data.length - 1 === i){
+              axios
+                .delete(`http://localhost:9090/books/${book.id}`)
+                .then(()=>{
+                  setDone(true)
+                  setLoad(false)
+                })
+            }
+          }, i * 100)
+        })
+        if(res.data.length === 0) {
+          axios
+            .delete(`http://localhost:9090/books/${book.id}`)
+            .then(()=>{
+              setDone(true)
+              setLoad(false)
+            })
+        }
+      })
   }
 
   const removeEntries = (type, no) => {
@@ -136,6 +168,21 @@ export default function DisplayBooks(props) {
           <Button variant='contained' onClick={()=> setDelDialog(false)}>Cancel</Button>  
           <Button variant='contained' color='secondary' onClick={()=>removeBook(delBook)}>Delete</Button> 
         </div>
+      </Dialog>
+      <Dialog open={load} onClose={() => setLoad(true)}>
+        <Grid container direction="column" justify="center" alignItems="center" style={{height: 200, width: 500}}>
+          <p>removing data...</p>
+          <CircularProgress />
+          <p>{rem} remaining</p>
+        </Grid>
+      </Dialog>
+      <Dialog open={done} onClose={() => window.location.reload()}>
+        <Grid container justify="center" direction="column" style={{padding: 20, width: 350}}>
+          <div>
+            <h3 style={{color: 'green', textAlign: "center"}}>Done</h3>
+          </div>
+          <Button variant="contained" color="primary" onClick={() => window.location.reload()}>Confirm</Button>
+        </Grid>
       </Dialog>
       <ImportData 
         imp={imp}

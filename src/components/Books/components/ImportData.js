@@ -287,7 +287,7 @@ export default function ImportData(props) {
           <Dialog open={done} onClose={() => window.location.reload()}>
             <Grid container justify="center" direction="column" style={{padding: 20, width: 350}}>
               <div>
-                <h3 style={{color: 'green', textAlign: "center"}}>Imported</h3>
+                <h3 style={{color: 'green', textAlign: "center"}}>Success</h3>
               </div>
               <Button variant="contained" color="primary" onClick={() => window.location.reload()}>Confirm</Button>
             </Grid>
