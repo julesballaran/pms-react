@@ -143,6 +143,8 @@ export default function DisplayBooks(props) {
         selectedBook={selectedBook}
         baptismal={baptismal}
         confirmation={confirmation}
+        death={death}
+        marriage={marriage}
       />
       {
         exp ?
