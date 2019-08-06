@@ -14,6 +14,11 @@
       "bookNo": "2",
       "type": "death",
       "id": 6
+    },
+    {
+      "bookNo": "3",
+      "type": "baptismal",
+      "id": 7
     }
   ],
   "baptismal": [
@@ -48,6 +53,38 @@
       "rev": "priest",
       "type": "baptismal",
       "id": 2
+    },
+    {
+      "book": "3",
+      "page": "222",
+      "no": "11",
+      "date": "2017-05-24",
+      "name": "b12",
+      "father": "f21",
+      "mother": "mother",
+      "birthdate": "2017-05-24",
+      "birthplace": "st. raphae",
+      "sponsor1": "asdasd1",
+      "sponsor2": "asdasd2",
+      "rev": "father",
+      "type": "baptismal",
+      "id": 3
+    },
+    {
+      "book": "3",
+      "page": 1,
+      "no": 1,
+      "date": "2017-05-24",
+      "name": "name",
+      "father": "father",
+      "mother": "mother",
+      "birthdate": "2017-05-24",
+      "birthplace": "birth place",
+      "sponsor1": "sponsor",
+      "sponsor2": "sponsor",
+      "rev": "priest",
+      "type": "baptismal",
+      "id": 4
     }
   ],
   "confirmation": [],
@@ -69,10 +106,32 @@
       "dateofdeath": "2017-05-24",
       "causeofdeath": "asds",
       "placeofburial": "asd",
-      "rev": "asds1"
+      "rev": "asd1"
     },
     {
       "book": "1",
+      "page": "12",
+      "date": "2017-05-24",
+      "name": "your name",
+      "age": "10",
+      "father": "father",
+      "mother": "mother",
+      "spouse": "spouse",
+      "nationality": "nationality",
+      "residence": "residence",
+      "civilstatus": "Single",
+      "dateofdeath": "2017-05-24",
+      "causeofdeath": "cause of death",
+      "placeofburial": "place of burial",
+      "rev": "priest",
+      "type": "death",
+      "id": 2,
+      "tableData": {
+        "id": 1
+      }
+    },
+    {
+      "book": "22",
       "page": 1,
       "date": "2017-05-24",
       "name": "name",
@@ -88,7 +147,10 @@
       "placeofburial": "place of burial",
       "rev": "priest",
       "type": "death",
-      "id": 2
+      "id": 3,
+      "tableData": {
+        "id": 0
+      }
     }
   ],
   "marriage": []

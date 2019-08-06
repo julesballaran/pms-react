@@ -9,7 +9,7 @@ import {
 import { ExcelRenderer } from 'react-excel-renderer'
 
 export default function ImportData(props) {
-  const { imp, setImp, selectedBook, baptismal, confirmation, death, marriage } = props
+  const { imp, setImp, selectedBook, baptismal, confirmation, death, marriage, url } = props
   const [done, setDone] = useState(false)
   const [load, setLoad] = useState(false)
   const [error, setError] = useState([])
@@ -77,7 +77,7 @@ export default function ImportData(props) {
           setTimeout(()=>{
             setSec(test.length - i)
             setCurrent(t.name)
-            axios.post('http://localhost:9090/baptismal', t)
+            axios.post(url + '/baptismal', t)
               .catch(()=>setError(error.push([data[0], data[3]])))
             if(test.length-1 === i){
               setLoad(false)
@@ -124,7 +124,7 @@ export default function ImportData(props) {
           setTimeout(()=>{
             setSec(test.length - i)
             setCurrent(t.name)
-            axios.post('http://localhost:9090/confirmation', t)
+            axios.post(url + '/confirmation', t)
               .catch(()=>setError(error.push([data[0], data[3]])))
             if(test.length-1 === i){
               setLoad(false)
@@ -178,7 +178,7 @@ export default function ImportData(props) {
           setTimeout(()=>{
             setSec(test.length - i)
             setCurrent(t.name)
-            axios.post('http://localhost:9090/death', t)
+            axios.post(url + '/death', t)
               .catch(()=>setError(error.push([data[0], data[2]])))
             if(test.length-1 === i){
               setLoad(false)
@@ -238,7 +238,7 @@ export default function ImportData(props) {
           setTimeout(()=>{
             setSec(test.length - i)
             setCurrent(`${t.name} & ${t.name2}`)
-            axios.post('http://localhost:9090/marriage', t)
+            axios.post(url + '/marriage', t)
               .catch(()=>setError(error.push([data[0], `${data[2]} & ${data[3]}`])))
             if(test.length-1 === i){
               setLoad(false)

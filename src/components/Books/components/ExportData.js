@@ -35,14 +35,14 @@ const dataSet1 = [
 ];
 
 export default function ExportData(props) {
-	const { setExp, b } = props	
+	const { setExp, b, url } = props	
 	const [f, setF] = useState(false)
 	const [data, setData] = useState([])
 	const [modal, setModal] = useState(true)
 
 	const handleDownload = () => {
 		axios
-			.get(`http://localhost:9090/${b.type}?book=${b.bookNo}`)
+			.get(`${url}/${b.type}?book=${b.bookNo}`)
 			.then(res => {
 				// res.data.map(test => {
 				// 	setData([...data, test])

@@ -10,7 +10,7 @@ import Manage from './components/Manage/Manage'
 import AllRecords from './components/Records/AllRecods'
 
 export default function Routes(props) {
-  const { baptismal, confirmation, death, marriage, fetchDataAll, loaded, edited, setEdited } = props
+  const { baptismal, confirmation, death, marriage, fetchDataAll, loaded, edited, setEdited, url } = props
   return (
     <Switch>
       <Route exact path='/' 
@@ -23,6 +23,7 @@ export default function Routes(props) {
             marriage={marriage} 
             loaded={loaded}
             edited={edited}
+            url={url}
           />
         }
       />
@@ -36,6 +37,7 @@ export default function Routes(props) {
             marriage={marriage}
             fetchDataAll={fetchDataAll}
             setEdited={setEdited}
+            url={url}
           />
         }
       />
@@ -46,6 +48,7 @@ export default function Routes(props) {
             baptismal={baptismal} 
             loaded={loaded}
             setEdited={setEdited}
+            url={url}
           />
         }
       />
@@ -56,6 +59,7 @@ export default function Routes(props) {
             baptismal={baptismal} 
             loaded={loaded}
             setEdited={setEdited}
+            url={url}
           />
         }
       />
@@ -66,6 +70,7 @@ export default function Routes(props) {
             confirmation={confirmation} 
             loaded={loaded}
             setEdited={setEdited}
+            url={url}
           />
         }
       />
@@ -76,6 +81,7 @@ export default function Routes(props) {
             confirmation={confirmation} 
             loaded={loaded}
             setEdited={setEdited}
+            url={url}
           />
         }
       />
@@ -86,6 +92,7 @@ export default function Routes(props) {
             death={death} 
             loaded={loaded}
             setEdited={setEdited}
+            url={url}
           />
         }
       />
@@ -96,6 +103,7 @@ export default function Routes(props) {
             death={death} 
             loaded={loaded}
             setEdited={setEdited}
+            url={url}
           />
         }
       />
@@ -106,6 +114,7 @@ export default function Routes(props) {
             marriage={marriage} 
             loaded={loaded}
             setEdited={setEdited}
+            url={url}
           />
         }
       />
@@ -116,6 +125,7 @@ export default function Routes(props) {
             marriage={marriage} 
             loaded={loaded}
             setEdited={setEdited}
+            url={url}
           />
         }
       />

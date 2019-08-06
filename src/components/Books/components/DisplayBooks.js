@@ -19,7 +19,7 @@ import ImportData from './ImportData'
 import ExportData from './ExportData'
 
 export default function DisplayBooks(props) {
-  const { bookList, baptismal, confirmation, death, marriage, fetchData, type } = props
+  const { bookList, baptismal, confirmation, death, marriage, fetchData, type, url } = props
   const [delDialog, setDelDialog] = useState(false)
   const [imp, setImp] = useState(false)
   const [delBook, setDelBook] = useState({})
@@ -34,18 +34,18 @@ export default function DisplayBooks(props) {
     setDelDialog(false)
     setLoad(true)
     axios
-    .get(`http://localhost:9090/${book.type}?book=${book.bookNo}`)
+    .get(`${url}/${book.type}?book=${book.bookNo}`)
       .then(res => {
         res.data.map((e, i)=> {
           setTimeout(()=>{
-            axios.delete(`http://localhost:9090/${e.type}/${e.id}`)
+            axios.delete(`${url}/${e.type}/${e.id}`)
               .then(() => {
                 setRem(res.data.length - i)
               })
 
             if(res.data.length - 1 === i){
               axios
-                .delete(`http://localhost:9090/books/${book.id}`)
+                .delete(`${url}/books/${book.id}`)
                 .then(()=>{
                   setDone(true)
                   setLoad(false)
@@ -55,26 +55,12 @@ export default function DisplayBooks(props) {
         })
         if(res.data.length === 0) {
           axios
-            .delete(`http://localhost:9090/books/${book.id}`)
+            .delete(`${url}/books/${book.id}`)
             .then(()=>{
               setDone(true)
               setLoad(false)
             })
         }
-      })
-  }
-
-  const removeEntries = (type, no) => {
-    axios
-    .get(`http://localhost:9090/${type}?book=${no}`)
-      .then(res => res.data.map((e, i)=> {
-        setTimeout(()=>{
-          axios.delete(`http://localhost:9090/${type}/${e.id}`)
-        }, i * 100)
-      }))
-      .finally(()=>{
-        fetchData()
-        setDelDialog(false)
       })
   }
 
@@ -192,10 +178,11 @@ export default function DisplayBooks(props) {
         confirmation={confirmation}
         death={death}
         marriage={marriage}
+        url={url}
       />
       {
         exp ?
-          <ExportData setExp={setExp} b={b}/>
+          <ExportData setExp={setExp} b={b} url={url}/>
         : null
       }
     </Grid>

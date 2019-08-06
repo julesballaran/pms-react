@@ -30,7 +30,7 @@ const styleCell = {
 
 export default function Marriage(props){
   const classes = useStyles()
-  const { marriage, loaded, setEdited } = props
+  const { marriage, loaded, setEdited, url } = props
   const [data, setData] = useState({})
   const [modal, setModal] = useState(false)
   const [edit, setEdit] = useState(true)
@@ -60,7 +60,7 @@ export default function Marriage(props){
 
   const handleEdit = () => {
     axios
-      .put(`http://localhost:9090/${data.type}/${data.id}`, data)
+      .put(`${url}/${data.type}/${data.id}`, data)
       .then(res => {
         const index = state.data.findIndex(d => d.id === data.id && d.type === data.type)
         const temp = state
@@ -74,7 +74,7 @@ export default function Marriage(props){
 
   const handleDelete = () => {
     axios
-      .delete(`http://localhost:9090/${data.type}/${data.id}`)
+      .delete(`${url}/${data.type}/${data.id}`)
       .then(res => {
         const index = state.data.findIndex(d => d.id === data.id && d.type === data.type)
         const temp = state

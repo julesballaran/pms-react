@@ -7,6 +7,7 @@ import Routes from './routes'
 import axios from 'axios'
 import Loader from './loader'
 
+const url = 'http://172.60.60.161:9090'
 
 function App() {
   const [loaded, setLoaded] = useState(false)
@@ -19,28 +20,28 @@ function App() {
   const fetchDataAll = () => {
     setLoaded(false)
     axios
-      .get('http://localhost:9090/baptismal')
+      .get(url + '/baptismal')
       .then(res => setBaptismal(res.data))
       .finally(fetchConfirmation)
   }
 
   const fetchConfirmation = () => {
     axios
-      .get('http://localhost:9090/confirmation')
+      .get(url + '/confirmation')
       .then(res => setConfirmation(res.data))
       .finally(fetchDeath)
   }
 
   const fetchDeath = () => {
     axios
-      .get('http://localhost:9090/death')
+      .get(url + '/death')
       .then(res => setDeath(res.data))
       .finally(fetchMarriage)
   }
 
   const fetchMarriage = () => {
     axios
-      .get('http://localhost:9090/marriage')
+      .get(url + '/marriage')
       .then(res => setMarriage(res.data))
       .finally(()=>setLoaded(true))
   }
@@ -68,6 +69,7 @@ function App() {
             loaded={loaded}
             edited={edited}
             setEdited={setEdited}
+            url={url}
           />
         </div>
       : 

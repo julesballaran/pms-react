@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 
 
 export default function Books(props){
-  const { confirmation, baptismal, death, marriage, loaded, edited } = props
+  const { confirmation, baptismal, death, marriage, loaded, edited, url } = props
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [type, setType] = useState('')
@@ -56,7 +56,7 @@ export default function Books(props){
 
   const fetchData = () => {
     axios
-      .get('http://localhost:9090/books')
+      .get(url + '/books')
       .then(res => setBookList(res.data))
   }
 
@@ -66,7 +66,7 @@ export default function Books(props){
       if(!bookList.find(b => b.bookNo === bookNo && b.type === type)){
         setErrAdd(false)
         axios
-          .post('http://localhost:9090/books', {
+          .post(url + '/books', {
             bookNo,
             type,
           })
@@ -117,6 +117,7 @@ export default function Books(props){
         death={death}
         marriage={marriage}
         fetchData={fetchData}
+        url={url}
       />
       <Dialog 
         open={open}
