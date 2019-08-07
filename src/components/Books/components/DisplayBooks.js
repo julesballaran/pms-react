@@ -14,6 +14,7 @@ import {
   Delete,
   Unarchive,
   Archive,
+  Close
 } from '@material-ui/icons/'
 import ImportData from './ImportData'
 import ExportData from './ExportData'
@@ -29,6 +30,7 @@ export default function DisplayBooks(props) {
   const [rem, setRem] = useState(0)
   const [load, setLoad] = useState(false)
   const [done, setDone] = useState(false)
+  const [err, setErr] = useState(false)
 
   const removeBook = (book) => {
     setDelDialog(false)
@@ -42,7 +44,6 @@ export default function DisplayBooks(props) {
               .then(() => {
                 setRem(res.data.length - i)
               })
-
             if(res.data.length - 1 === i){
               axios
                 .delete(`${url}/books/${book.id}`)
@@ -63,6 +64,8 @@ export default function DisplayBooks(props) {
         }
       })
   }
+
+
 
   const handleExport = book => {
     setExp(true)
@@ -149,10 +152,19 @@ export default function DisplayBooks(props) {
         onClose={()=>setDelDialog(false)}
         className='del-dialog'
       >
+        <div style={{background: '#3f51b5', padding: 16}}>
+          <Grid container>
+            <h3 style={{color: 'white', margin: 0, padding: 0}}>Remove Book</h3>
+            <Close 
+              style={{color: 'white', marginLeft: 'auto', cursor: 'pointer'}}
+              onClick={()=>setDelDialog(false)}
+            />
+          </Grid>
+        </div>
         <h3>Delete Book {delBook.bookNo}?</h3>
         <div className='del-dialog-btn'>
-          <Button variant='contained' onClick={()=> setDelDialog(false)}>Cancel</Button>  
-          <Button variant='contained' color='secondary' onClick={()=>removeBook(delBook)}>Delete</Button> 
+          <Button style={{color: 'black', border: '1px solid black'}} onClick={()=> setDelDialog(false)}>Cancel</Button>  
+          <Button style={{color: 'red', border: '1px solid red'}}  color='secondary' onClick={()=>removeBook(delBook)}>Delete</Button> 
         </div>
       </Dialog>
       <Dialog open={load} onClose={() => setLoad(true)}>

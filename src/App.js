@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
 import background from './img/grid2bg.jpg'
 import './App.css';
 import Header from './components/Header/Header'

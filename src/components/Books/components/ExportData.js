@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import ReactExport from 'react-data-export'
-import { Dialog, Button } from '@material-ui/core/'
+import { Dialog, Button, Grid } from '@material-ui/core/'
+import Close from '@material-ui/icons/Close'
 
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
@@ -62,9 +63,25 @@ export default function ExportData(props) {
 				setModal(false)
 				setExp(false)
 			}}
+			className='del-dialog'
 		>	
+			<div style={{background: '#3f51b5', padding: 16}}>
+        <Grid container>
+          <h3 style={{color: 'white', margin: 0, padding: 0}}>Baptismal Record</h3>
+          <Close 
+            style={{color: 'white', marginLeft: 'auto', cursor: 'pointer'}}
+            onClick={()=>{
+							setF(false)
+							setModal(false)
+							setExp(false)
+						}}
+          />
+        </Grid>
+      </div>
 			<h3>Backup {b.type} book {b.bookNo}</h3>
-			<Button onClick={handleDownload}>test</Button>
+			<Grid container justify="center">
+				<Button style={{color: 'green', width: '80%', marginBottom: 25, border: '1px solid green'}} onClick={handleDownload}>Save</Button>
+			</Grid>
 			{
 				f && b.type === 'baptismal' ?
 					<ExcelFile hideElement={true} filename={`backup-${b.type}-book-${b.bookNo}`}>

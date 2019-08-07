@@ -5,7 +5,10 @@ import {
   Button,
   CircularProgress,
   Grid,
+  Input,
 } from '@material-ui/core/';
+
+import Close from '@material-ui/icons/Close'
 import { ExcelRenderer } from 'react-excel-renderer'
 
 export default function ImportData(props) {
@@ -15,13 +18,17 @@ export default function ImportData(props) {
   const [error, setError] = useState([])
   const [sec, setSec] = useState(0)
   const [current, setCurrent] = useState('')
+  const [file, setFile] = useState(null)
   
-  const handleFile = e => {
+  const handleFile = () => {
 
+    if(!file) {
+      return
+    }
+    
     setImp(false)
     setLoad(true)
 
-    const file = e.target.files[0]
     ExcelRenderer(file, (err, res) => {
       if(err){
         console.error(err)
@@ -255,20 +262,36 @@ export default function ImportData(props) {
     <React.Fragment>
       <Dialog
         open={imp}
-        onClose={()=>setImp(false)}
-      >
-        <Button
-          variant="contained"
-          component="label"
-          style={{margin: 30}}
-        >
-          Upload File
+        onClose={()=>{
+          setImp(false)
+          setFile(null)
+        }}
+      > 
+          <div style={{background: '#3f51b5', padding: 16}}>
+            <Grid container>
+              <h3 style={{color: 'white', margin: 0, padding: 0}}>Import Book</h3>
+              <Close 
+                style={{color: 'white', marginLeft: 'auto', cursor: 'pointer'}}
+                onClick={()=>{
+                  setImp(false)
+                  setFile(null)
+                }}
+              />
+            </Grid>
+          </div>
           <input
             type="file"
-            style={{ display: "none" }}
-            onChange={e => handleFile(e)}
+            onChange={e => setFile(e.target.files[0])}
+            style={{padding: 30}}
           />
-        </Button>
+          <Grid container justify="center">
+            <Button 
+              style={{color: '#3f51b5', border: '1px solid #3f51b5', width: '70%', marginBottom: 20}} 
+              onClick={handleFile}
+            >
+              Import
+            </Button>
+          </Grid>
       </Dialog>
       {
         done && error.length ?

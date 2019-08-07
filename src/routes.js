@@ -6,7 +6,6 @@ import Confirmation from './components/Records/Confirmation'
 import Death from './components/Records/Death'
 import Marriage from './components/Records/Marriage'
 import Books from './components/Books/Books'
-import Manage from './components/Manage/Manage'
 import AllRecords from './components/Records/AllRecods'
 
 export default function Routes(props) {
@@ -129,7 +128,6 @@ export default function Routes(props) {
           />
         }
       />
-      <Route path='/manage' component={Manage}/>
     </Switch>
   )
 }

@@ -12,7 +12,7 @@ import {
   FormControl,
 } from '@material-ui/core/';
 
-
+import Close from '@material-ui/icons/Close'
 import DisplayBooks from './components/DisplayBooks'
 
 const useStyles = makeStyles({
@@ -82,7 +82,7 @@ export default function Books(props){
 
   return (
     <Grid container wrap='nowrap' direction="column" style={{padding: '0 50px'}}>
-      <Grid container style={{marginTop: 10}}>
+      <Grid container>
         <Grid>
           <FormControl>
             <InputLabel htmlFor="type">Type</InputLabel>
@@ -124,6 +124,15 @@ export default function Books(props){
         onClose={() => setOpen(false)}
       >
         <form onSubmit={e => handleSubmit(e)}>
+          <div style={{background: '#3f51b5', padding: 16}}>
+            <Grid container>
+              <h3 style={{color: 'white', margin: 0}}>Add Book</h3>
+              <Close 
+                style={{color: 'white', marginLeft: 'auto', cursor: 'pointer'}}
+                onClick={()=>setOpen(false)}
+              />
+            </Grid>
+          </div>
           <div className="modal-style">
             <TextField
               style={{width: '80%'}}
