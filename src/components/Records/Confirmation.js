@@ -2,13 +2,10 @@ import React, { useState, useEffect } from 'react';
 import MaterialTable from 'material-table';
 import axios from 'axios'
 import { makeStyles } from '@material-ui/styles'
-import {
-  Dialog,
-  Button,
-} from '@material-ui/core/';
+import Close from '@material-ui/icons/Close'
 
+import DeleteRecord from './actions/DeleteRecord'
 import ConfirmationDisplay from './display/ConfirmationDisplay'
-
 import print from './print/print'
 
 const useStyles = makeStyles({
@@ -89,7 +86,7 @@ export default function Confirmation(props) {
   return (
     <React.Fragment>
       <MaterialTable
-        title="Confirmation"
+        title="Confirmation Records"
         columns={state.columns}
         data={state.data}
         onRowClick={(e, rowData) => {
@@ -109,17 +106,12 @@ export default function Confirmation(props) {
         setDelDialog={setDelDialog}
         print={print}
       />
-      <Dialog 
-        open={delDialog}
-        onClose={()=>setDelDialog(false)}
-        className='del-dialog'
-      >
-        <h3>Remove {data.name}?</h3>
-        <div className='del-dialog-btn'>
-          <Button variant='contained' onClick={()=> setDelDialog(false)}>Cancel</Button>  
-          <Button variant='contained' color='secondary' onClick={handleDelete}>Delete</Button> 
-        </div>
-      </Dialog>
+      <DeleteRecord 
+        delDialog={delDialog}
+        setDelDialog={setDelDialog}
+        handleDelete={handleDelete}
+        data={data}
+      />
     </React.Fragment>
   )
 }

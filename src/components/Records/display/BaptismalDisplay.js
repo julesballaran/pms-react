@@ -1,22 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {
   Dialog,
   TextField,
   Button,
+  Grid,
+  Select,
+  MenuItem,
 } from '@material-ui/core/';
+
+import Close from '@material-ui/icons/Close'
+
+import PrintRecord from '../actions/PrintRecord'
 
 export default function BaptismalDisplay(props) {
   const { modal, setModal, classes, data, setData, edit, setEdit, handleEdit, setDelDialog, print } = props
+  const [printModal, setPrintModal] = useState(false)
+
   return (
-    <Dialog
+    <React.Fragment>
+      <Dialog
         open={modal}
         onClose={() => {
           setModal(false)
           setEdit(true)
         }}
       >
-        <div className='display-details' style={{marginTop: 20}}>
+        <div className='display-details'>
+          <div style={{background: '#3f51b5', padding: 16}}>
+            <Grid container>
+              <h3 style={{color: 'white', margin: 0}}>Baptismal Record</h3>
+              <Close 
+                style={{color: 'white', marginLeft: 'auto', cursor: 'pointer'}}
+                onClick={() => {
+                  setModal(false)
+                  setEdit(true)
+                }}
+              />
+            </Grid>
+          </div>
           <div className={classes.tFieldCont}>
             <TextField className={classes.tField} disabled={edit} label='Book' value={data.book} onChange={e => setData({...data, book: e.target.value})}/>
             <TextField className={classes.tField} disabled={edit} label='Page' value={data.page} onChange={e => setData({...data, page: e.target.value})}/>
@@ -45,7 +67,7 @@ export default function BaptismalDisplay(props) {
           </div>
           {edit ? 
           <div className={classes.tFieldCont} style={{marginBottom: 20}}>
-            <Button className={classes.tField} variant='contained' color='primary' onClick={()=>print(data)}>Print</Button>
+            <Button className={classes.tField} variant='contained' color='primary' onClick={()=>setPrintModal(true)}>Print</Button>
             <Button className={classes.tField} variant='contained' style={{background: 'green', color: 'white'}} onClick={() => setEdit(false)}>Edit</Button>
             <Button className={classes.tField} variant='contained' color='secondary' onClick={() => setDelDialog(true)}>Delete</Button>
           </div>
@@ -57,5 +79,12 @@ export default function BaptismalDisplay(props) {
           }
         </div>
       </Dialog>
+      <PrintRecord 
+        printModal={printModal}
+        setPrintModal={setPrintModal}
+        data={data}
+        print={print}
+      />
+    </React.Fragment>
   )
 }

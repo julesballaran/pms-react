@@ -4,15 +4,12 @@ import axios from 'axios'
 
 import { makeStyles } from '@material-ui/styles'
 
-import {
-  Dialog,
-  Button,
-} from '@material-ui/core/';
-
 import BaptismalDisplay from './display/BaptismalDisplay'
 import ConfirmationDisplay from './display/ConfirmationDisplay'
 import DeathDisplay from './display/DeathDisplay'
 import MarriageDisplay from './display/MarriageDisplay'
+
+import DeleteRecord from './actions/DeleteRecord'
 
 import print from './print/print'
 
@@ -147,17 +144,12 @@ export default function AllRecords(props){
         />    
       : null
       }
-      <Dialog 
-        open={delDialog}
-        onClose={()=>setDelDialog(false)}
-        className='del-dialog'
-      >
-        <h3>Remove {data.name}?</h3>
-        <div className='del-dialog-btn'>
-          <Button variant='contained' onClick={()=> setDelDialog(false)}>Cancel</Button>  
-          <Button variant='contained' color='secondary' onClick={handleDelete}>Delete</Button> 
-        </div>
-      </Dialog>
+      <DeleteRecord 
+        delDialog={delDialog}
+        setDelDialog={setDelDialog}
+        handleDelete={handleDelete}
+        data={data}
+      />
     </React.Fragment>
   )
 }

@@ -33,7 +33,7 @@ function getDate(date){
   return day
 }
 
-function setBaptismal(data){
+function setBaptismal(data, sign, type){
 	const day1 = getDate(data.birthdate)
 	const day2 = getDate(data.date)
 
@@ -55,12 +55,12 @@ function setBaptismal(data){
     page: data.page,
     no: data.no,
     date: today,
-    priest: 'test',
-    purpose: 'for reference',
+    priest: sign,
+    purpose: type,
   }
 }
 
-function setConfirmation(data){
+function setConfirmation(data, sign, type){
 	const day = getDate(data.date)
 	return {
 		name: data.name,
@@ -72,12 +72,12 @@ function setConfirmation(data){
     page: data.page,
     no: data.no,
     date: today,
-    priest: 'test',
-    purpose: 'for reference',
+    priest: sign,
+    purpose: type,
 	}
 }
 
-function setDeath(data){
+function setDeath(data, sign){
 	const day = today.split(' ')
 	return {
 		name: data.name,
@@ -96,13 +96,13 @@ function setDeath(data){
 		month: day[1],
 		day: numberToOrdinal(day[0]),
 		YY: day[2].substr(2),
-		sign: 'test',
+		sign: sign,
 		no: data.book,
 		page: data.page,
 	}
 }
 
-function setMarriage(data){
+function setMarriage(data, sign){
 	const day = today.split(' ')
 	return {
 		name: data.name,
@@ -129,11 +129,15 @@ function setMarriage(data){
 		YY: day[2].substr(2),
 		no: data.book,
 		page: data.page,
-		sign: 'test',
+		sign: sign,
 	}
 }
 
-export default function print(data){
+export default function print(data, sign, type){
+	if(type === 'none') {
+		type = ''
+	}
+
 	let file, func;
 	if(data.type === 'baptismal'){
 		file = bap
@@ -153,7 +157,7 @@ export default function print(data){
     if (error) { throw error };
     var zip = new PizZip(content);
     var doc=new docxtemplater().loadZip(zip)
-    doc.setData(func(data));
+    doc.setData(func(data, sign, type));
     try {
       doc.render()
     }
