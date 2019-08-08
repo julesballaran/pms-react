@@ -11,6 +11,8 @@ import {
 import Close from '@material-ui/icons/Close'
 import { ExcelRenderer } from 'react-excel-renderer'
 
+let timer = []
+
 export default function ImportData(props) {
   const { imp, setImp, selectedBook, baptismal, confirmation, death, marriage, url } = props
   const [done, setDone] = useState(false)
@@ -19,6 +21,9 @@ export default function ImportData(props) {
   const [sec, setSec] = useState(0)
   const [current, setCurrent] = useState('')
   const [file, setFile] = useState(null)
+  const [complete, setComplete] = useState(0)
+  const [err, setErr] = useState(false)
+  const [inval, setInval] = useState(false)
   
   const handleFile = () => {
 
@@ -27,23 +32,52 @@ export default function ImportData(props) {
     }
     
     setImp(false)
-    setLoad(true)
 
     ExcelRenderer(file, (err, res) => {
       if(err){
         console.error(err)
       } else {
         if(selectedBook.type === 'baptismal'){
-          importBaptismal(res.rows)
+          if(res.cols.length === 11){
+            setLoad(true)
+           importBaptismal(res.rows)
+          } else {
+            setInval(true)
+          }
         } else if (selectedBook.type === 'confirmation'){
-          importConfirmation(res.rows)
+          if(res.cols.length === 7){
+            setLoad(true)
+            importConfirmation(res.rows)
+          } else {
+            setInval(true)
+          }
         } else if (selectedBook.type === 'death'){
-          importDeath(res.rows)
+          if(res.cols.length === 14){
+            setLoad(true)
+            importDeath(res.rows)
+          } else {
+            setInval(true)
+          }
         } else if (selectedBook.type === 'marriage'){
-          importMarriage(res.rows)
+          if(res.cols.length === 20){
+            setLoad(true)
+            importMarriage(res.rows)
+          } else {
+            setInval(true)
+          }
         }
       }
     })
+  }
+
+  const clearTimer = (i, n) => {
+    while(i < n){
+      clearTimeout(timer[i])
+      i++;
+    }
+    setDone(true)
+    setLoad(false)
+    setErr(true)
   }
 
   const importBaptismal = arr => {
@@ -81,16 +115,17 @@ export default function ImportData(props) {
           setDone(true)
         }
         test.map((t, i) => {
-          setTimeout(()=>{
+          timer[i] = setTimeout(()=>{
             setSec(test.length - i)
             setCurrent(t.name)
+            setComplete((i / test.length) * 100)
             axios.post(url + '/baptismal', t)
-              .catch(()=>setError(error.push([data[0], data[3]])))
+              .catch(() => clearTimer(i, test.length))
             if(test.length-1 === i){
               setLoad(false)
               setDone(true)
             }
-          }, i * 1000)
+          }, i * 200)
         })
       }
       setError(error)
@@ -131,13 +166,14 @@ export default function ImportData(props) {
           setTimeout(()=>{
             setSec(test.length - i)
             setCurrent(t.name)
+            setComplete((i / test.length) * 100)
             axios.post(url + '/confirmation', t)
-              .catch(()=>setError(error.push([data[0], data[3]])))
+              .catch(() => clearTimer(i, test.length))
             if(test.length-1 === i){
               setLoad(false)
               setDone(true)
             }
-          }, i * 1000)
+          }, i * 200)
         })
       }
       setError(error)
@@ -185,13 +221,14 @@ export default function ImportData(props) {
           setTimeout(()=>{
             setSec(test.length - i)
             setCurrent(t.name)
+            setComplete((i / test.length) * 100)
             axios.post(url + '/death', t)
-              .catch(()=>setError(error.push([data[0], data[2]])))
+              .catch(() => clearTimer(i, test.length))
             if(test.length-1 === i){
               setLoad(false)
               setDone(true)
             }
-          }, i * 1000)
+          }, i * 200)
         })
       }
       setError(error)
@@ -245,13 +282,14 @@ export default function ImportData(props) {
           setTimeout(()=>{
             setSec(test.length - i)
             setCurrent(`${t.name} & ${t.name2}`)
+            setComplete((i / test.length) * 100)
             axios.post(url + '/marriage', t)
-              .catch(()=>setError(error.push([data[0], `${data[2]} & ${data[3]}`])))
+              .catch(() => clearTimer(i, test.length))
             if(test.length-1 === i){
               setLoad(false)
               setDone(true)
             }
-          }, i * 1000)
+          }, i * 200)
         })
       }
       setError(error)
@@ -294,7 +332,16 @@ export default function ImportData(props) {
           </Grid>
       </Dialog>
       {
-        done && error.length ?
+        done && err ?  
+          <Dialog open={done} onClose={() => window.location.reload()}>
+            <Grid container justify="center" direction="column" style={{padding: 20, width: 350}}>
+              <div>
+                <h3 style={{color: 'red', textAlign: "center"}}>An error occurred, please reload the page</h3>
+              </div>
+              <Button style={{color: 'red', border: '1px solid red'}} onClick={() => window.location.reload()}>Reload</Button>
+            </Grid>
+          </Dialog>
+        : done && error.length ?
           <Dialog open={done} onClose={() => window.location.reload()}>
             <Grid container justify="center" direction="column" style={{padding: 20, width: 350}}>
               <div>
@@ -303,7 +350,7 @@ export default function ImportData(props) {
                   <p key={i}>Page: <i style={{color: 'red'}}>{r[0]}</i>   Name: <i style={{color: 'red'}}>{r[1]}</i></p>
                 ))} 
               </div>
-              <Button variant="contained" color="primary" onClick={() => window.location.reload()}>Confirm</Button>
+              <Button style={{color: 'red', border: '1px solid red'}} onClick={() => window.location.reload()}>Confirm</Button>
             </Grid>
           </Dialog>
         : done && error.length === 0 ?
@@ -312,16 +359,33 @@ export default function ImportData(props) {
               <div>
                 <h3 style={{color: 'green', textAlign: "center"}}>Success</h3>
               </div>
-              <Button variant="contained" color="primary" onClick={() => window.location.reload()}>Confirm</Button>
+              <Button style={{color: 'green', border: '1px solid green'}} onClick={() => window.location.reload()}>Confirm</Button>
             </Grid>
           </Dialog>
         : null
       }
       <Dialog open={load} onClose={() => setLoad(true)}>
+        <div style={{background: '#3f51b5', padding: 16}}>
+          <Grid container>
+            <h3 style={{color: 'white', margin: 0, padding: 0}}>{complete.toFixed(2)}%</h3>
+          </Grid>
+        </div>
         <Grid container direction="column" justify="center" alignItems="center" style={{height: 200, width: 500}}>
           <p>adding {current} ...</p>
-          <CircularProgress />
+          <CircularProgress variant="static" value={complete}/>
           <p>{sec} remaining</p>
+        </Grid>
+      </Dialog>
+      <Dialog open={inval} onClose={() => setInval(false)}>
+        <Grid container justify="center" direction="column" style={{padding: 20, width: 350}}>
+          <div>
+            <h3 style={{color: 'red', textAlign: "center"}}>Invalid Excel file!</h3>
+            <Close 
+              style={{color: 'white', marginLeft: 'auto', cursor: 'pointer'}}
+              onClick={()=>setInval(false)}
+            />
+          </div>
+          <Button style={{color: 'red', border: '1px solid red'}} onClick={()=>setInval(false)}>Close</Button>
         </Grid>
       </Dialog>
     </React.Fragment>

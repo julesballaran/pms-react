@@ -19,6 +19,8 @@ import {
 import ImportData from './ImportData'
 import ExportData from './ExportData'
 
+let timer = []
+
 export default function DisplayBooks(props) {
   const { bookList, baptismal, confirmation, death, marriage, fetchData, type, url } = props
   const [delDialog, setDelDialog] = useState(false)
@@ -31,6 +33,7 @@ export default function DisplayBooks(props) {
   const [load, setLoad] = useState(false)
   const [done, setDone] = useState(false)
   const [err, setErr] = useState(false)
+  const [complete, setComplete] = useState(0)
 
   const removeBook = (book) => {
     setDelDialog(false)
@@ -39,11 +42,13 @@ export default function DisplayBooks(props) {
     .get(`${url}/${book.type}?book=${book.bookNo}`)
       .then(res => {
         res.data.map((e, i)=> {
-          setTimeout(()=>{
+          timer[i] = setTimeout(()=>{
             axios.delete(`${url}/${e.type}/${e.id}`)
               .then(() => {
                 setRem(res.data.length - i)
+                setComplete((i / res.data.length) * 100)
               })
+              .catch(() => clearTimer(i, res.data.length))
             if(res.data.length - 1 === i){
               axios
                 .delete(`${url}/books/${book.id}`)
@@ -52,7 +57,7 @@ export default function DisplayBooks(props) {
                   setLoad(false)
                 })
             }
-          }, i * 100)
+          }, i * 200)
         })
         if(res.data.length === 0) {
           axios
@@ -65,7 +70,15 @@ export default function DisplayBooks(props) {
       })
   }
 
-
+  const clearTimer = (i, n) => {
+    while(i < n){
+      clearTimeout(timer[i])
+      i++;
+    }
+    setDone(true)
+    setLoad(false)
+    setErr(true)
+  }
 
   const handleExport = book => {
     setExp(true)
@@ -128,27 +141,43 @@ export default function DisplayBooks(props) {
             />
           </Grid>
         </div>
-        <h3>Delete Book {delBook.bookNo}?</h3>
+        <h3>Delete {delBook.type} book {delBook.bookNo}?</h3>
         <div className='del-dialog-btn'>
           <Button style={{color: 'black', border: '1px solid black'}} onClick={()=> setDelDialog(false)}>Cancel</Button>  
           <Button style={{color: 'red', border: '1px solid red'}}  color='secondary' onClick={()=>removeBook(delBook)}>Delete</Button> 
         </div>
       </Dialog>
       <Dialog open={load} onClose={() => setLoad(true)}>
+        <div style={{background: '#3f51b5', padding: 16}}>
+          <Grid container>
+            <h3 style={{color: 'white', margin: 0, padding: 0}}>{complete.toFixed(2)}%</h3>
+          </Grid>
+        </div>
         <Grid container direction="column" justify="center" alignItems="center" style={{height: 200, width: 500}}>
           <p>removing data...</p>
-          <CircularProgress />
+          <CircularProgress variant="static" value={complete}/>
           <p>{rem} remaining</p>
         </Grid>
       </Dialog>
-      <Dialog open={done} onClose={() => window.location.reload()}>
-        <Grid container justify="center" direction="column" style={{padding: 20, width: 350}}>
-          <div>
-            <h3 style={{color: 'green', textAlign: "center"}}>Done</h3>
-          </div>
-          <Button variant="contained" color="primary" onClick={() => window.location.reload()}>Confirm</Button>
-        </Grid>
-      </Dialog>
+      {err ?
+        <Dialog open={done} onClose={() => window.location.reload()}>
+          <Grid container justify="center" direction="column" style={{padding: 20, width: 350}}>
+            <div>
+              <h3 style={{color: 'red', textAlign: "center"}}>An error occurred, please reload the page</h3>
+            </div>
+            <Button style={{color: 'red', border: '1px solid red'}} onClick={() => window.location.reload()}>Reload</Button>
+          </Grid>
+        </Dialog>
+        :
+        <Dialog open={done} onClose={() => window.location.reload()}>
+          <Grid container justify="center" direction="column" style={{padding: 20, width: 350}}>
+            <div>
+              <h3 style={{color: 'green', textAlign: "center"}}>Completed</h3>
+            </div>
+            <Button style={{color: 'green',border: '1px solid green'}} onClick={() => window.location.reload()}>Confirm</Button>
+          </Grid>
+        </Dialog>
+      }
       <ImportData 
         imp={imp}
         setImp={setImp}

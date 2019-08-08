@@ -36,15 +36,27 @@ function getDate(date){
 function setBaptismal(data, sign, type){
 	const day1 = getDate(data.birthdate)
 	const day2 = getDate(data.date)
+	const x = ['X', 'X']
+
+	if(day1[2] > 1999){
+		x[0] = ''
+		day1[2] = day1[2].toString().substr(2)
+	} 
+	if(day2[2] > 1999){
+		x[1] = ''
+		day2[2] = day2[2].toString().substr(2)
+	} 
 
 	return {
     name: data.name,
     father: data.father,
     mother: data.mother,
     born: data.birthplace,
+    X1: x[0],
     day1: day1[0],
     month1: day1[1],
     year1: day1[2],
+    X2: x[1],
     day2: day2[0],
     month2: day2[1],
     year2: day2[2],
@@ -62,8 +74,15 @@ function setBaptismal(data, sign, type){
 
 function setConfirmation(data, sign, type){
 	const day = getDate(data.date)
+	let x = 'X'
+	if(day[2] > 1999){
+		x = ''
+		day[2] = day[2].toString().substr(2)
+	} 
+	
 	return {
 		name: data.name,
+		X1: x,
 		day: day[0],
 		month: day[1],
 		year: day[2],

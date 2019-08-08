@@ -80,12 +80,12 @@ export default function ExportData(props) {
       </div>
 			<h3>Backup {b.type} book {b.bookNo}</h3>
 			<Grid container justify="center">
-				<Button style={{color: 'green', width: '80%', marginBottom: 25, border: '1px solid green'}} onClick={handleDownload}>Save</Button>
+				<Button style={{color: '#3f51b5', width: '80%', marginBottom: 25, border: '1px solid #3f51b5'}} onClick={handleDownload}>Save</Button>
 			</Grid>
 			{
 				f && b.type === 'baptismal' ?
 					<ExcelFile hideElement={true} filename={`backup-${b.type}-book-${b.bookNo}`}>
-	          <ExcelSheet data={data} name="Employees">
+	          <ExcelSheet data={data} name="Sheet 1">
 	            <ExcelColumn label="Page" value="page"/>
 	            <ExcelColumn label="No" value="no"/>
 	            <ExcelColumn label="Date" value="date"/>
@@ -101,7 +101,7 @@ export default function ExportData(props) {
 	        </ExcelFile>
 	      : f && b.type === 'confirmation' ?
 	      	<ExcelFile hideElement={true} filename={`backup-${b.type}-book-${b.bookNo}`}>
-	          <ExcelSheet data={data} name="Employees">
+	          <ExcelSheet data={data} name="Sheet 1">
 	            <ExcelColumn label="Page" value="page"/>
 	            <ExcelColumn label="No" value="no"/>
 	            <ExcelColumn label="Date" value="date"/>
@@ -113,7 +113,7 @@ export default function ExportData(props) {
 	        </ExcelFile>
 	      : f && b.type === 'death' ?
 	      	<ExcelFile hideElement={true} filename={`backup-${b.type}-book-${b.bookNo}`}>
-	          <ExcelSheet data={data} name="Employees">
+	          <ExcelSheet data={data} name="Sheet 1">
 	            <ExcelColumn label="Page" value="page"/>
 	            <ExcelColumn label="Date" value="date"/>
 	            <ExcelColumn label="Name" value="name"/>
@@ -132,7 +132,7 @@ export default function ExportData(props) {
 	        </ExcelFile>
 	      : f && b.type === 'marriage' ?
 	      	<ExcelFile hideElement={true} filename={`backup-${b.type}-book-${b.bookNo}`}>
-	          <ExcelSheet data={data} name="Employees">
+	          <ExcelSheet data={data} name="Sheet 1">
 	            <ExcelColumn label="Page" value="page"/>
 	            <ExcelColumn label="Date" value="date"/>
 	            <ExcelColumn label="Name 1" value="name"/>

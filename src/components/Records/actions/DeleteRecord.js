@@ -27,8 +27,8 @@ export default function DeleteRecord(props) {
         </div>
         <h3>Remove {data.name}?</h3>
         <div className='del-dialog-btn'>
-          <Button variant='contained' onClick={()=> setDelDialog(false)}>Cancel</Button>  
-          <Button variant='contained' color='secondary' onClick={handleDelete}>Delete</Button> 
+          <Button style={{color: 'black', border: '1px solid black'}} onClick={()=> setDelDialog(false)}>Cancel</Button>  
+          <Button style={{color: 'red', border: '1px solid black'}} onClick={handleDelete}>Delete</Button> 
         </div>
       </Dialog>
 		</React.Fragment>

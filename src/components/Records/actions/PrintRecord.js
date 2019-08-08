@@ -27,7 +27,7 @@ export default function PrintRecord(props) {
           />
         </Grid>
       </div>
-      <Grid container alignItems="base-line" style={{padding: 20}}>
+      <Grid container alignItems="baseline" style={{padding: 20}}>
         <TextField label="Sign" value={sign} onChange={e => setSign(e.target.value)}/>
         <Select
           value={type}
@@ -38,7 +38,7 @@ export default function PrintRecord(props) {
           <MenuItem value='for reference'>for reference</MenuItem>
           <MenuItem value='for marriage'>for marriage</MenuItem>
         </Select>
-        <Button variant="contained" color="primary" 
+        <Button style={{color: '#3f51b5', border: '1px solid #3f51b5'}}
           onClick={()=>{
             print(data, sign, type)
             setPrintModal(false)

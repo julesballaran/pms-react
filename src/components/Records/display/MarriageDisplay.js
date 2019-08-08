@@ -77,14 +77,14 @@ export default function MarriageDisplay(props) {
           </div>
           {edit ? 
           <div className={classes.tFieldCont} style={{marginBottom: 20}}>
-            <Button className={classes.tField} variant='contained' color='primary' onClick={()=>setPrintModal(true)}>Print</Button>
-            <Button className={classes.tField} variant='contained' style={{background: 'green', color: 'white'}} onClick={() => setEdit(false)}>Edit</Button>
-            <Button className={classes.tField} variant='contained' color='secondary' onClick={() => setDelDialog(true)}>Delete</Button>
+            <Button className={classes.tField} style={{color: '#3f51b5', border: '1px solid #3f51b5'}} onClick={()=>setPrintModal(true)}>Print</Button>
+            <Button className={classes.tField} style={{color: 'green', border: '1px solid green'}} onClick={() => setEdit(false)}>Edit</Button>
+            <Button className={classes.tField} style={{color: 'red', border: '1px solid red'}} onClick={() => setDelDialog(true)}>Delete</Button>
           </div>
           : 
           <div className={classes.tFieldCont} style={{marginBottom: 20}}>
-            <Button className={classes.tField} variant='contained' onClick={() => setEdit(true)}>Cancel</Button>
-            <Button className={classes.tField} variant='contained' style={{background: 'green', color: 'white'}} onClick={handleEdit}>Save</Button>
+            <Button className={classes.tField} style={{color: 'black', border: '1px solid black'}} onClick={() => setEdit(true)}>Cancel</Button>
+            <Button className={classes.tField} style={{color: 'green', border: '1px solid green'}} onClick={handleEdit}>Save</Button>
           </div>
           }
         </div>
