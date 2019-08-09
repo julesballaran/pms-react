@@ -32,6 +32,7 @@ export default function ImportData(props) {
     }
     
     setImp(false)
+    setLoad(true)
 
     ExcelRenderer(file, (err, res) => {
       if(err){
@@ -39,30 +40,30 @@ export default function ImportData(props) {
       } else {
         if(selectedBook.type === 'baptismal'){
           if(res.cols.length === 11){
-            setLoad(true)
            importBaptismal(res.rows)
           } else {
+            setLoad(false)
             setInval(true)
           }
         } else if (selectedBook.type === 'confirmation'){
           if(res.cols.length === 7){
-            setLoad(true)
             importConfirmation(res.rows)
           } else {
+            setLoad(false)
             setInval(true)
           }
         } else if (selectedBook.type === 'death'){
           if(res.cols.length === 14){
-            setLoad(true)
             importDeath(res.rows)
           } else {
+            setLoad(false)
             setInval(true)
           }
         } else if (selectedBook.type === 'marriage'){
           if(res.cols.length === 20){
-            setLoad(true)
             importMarriage(res.rows)
           } else {
+            setLoad(false)
             setInval(true)
           }
         }
