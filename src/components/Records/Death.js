@@ -47,6 +47,7 @@ export default function Death(props){
   })
 
   useEffect(()=>{
+    document.title = 'Death Records - PMS'
     if(!loaded){
       props.history.push('/');
     } else {

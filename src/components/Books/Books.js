@@ -43,15 +43,16 @@ export default function Books(props){
   const [type2, setType2] = useState('all')
   
   useEffect(() => {
-      if(edited) {
-        window.location.reload()
-      }
-      if(!loaded){
-        props.history.push('/');
-      } else {
-        fetchData()
-      }
-    }, []) 
+    document.title = 'Books - PMS'
+    if(edited) {
+      window.location.reload()
+    }
+    if(!loaded){
+      props.history.push('/');
+    } else {
+      fetchData()
+    }
+  }, []) 
 
 
   const fetchData = () => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MaterialTable from 'material-table';
 import axios from 'axios'
 
@@ -49,6 +49,10 @@ export default function AllRecords(props){
     ],
     data: [...baptismal, ...confirmation, ...death, ...marriage]
   })
+
+  useEffect(()=> {
+    document.title = 'All Records - PMS'
+  }, [])
 
   const handleEdit = () => {
     delete data.tableData

@@ -46,6 +46,7 @@ export default function Marriage(props){
   })
 
   useEffect(()=>{
+    document.title = 'Marriage Records - PMS'
     if(!loaded){
       props.history.push('/');
     } else {

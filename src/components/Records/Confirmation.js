@@ -46,6 +46,7 @@ export default function Confirmation(props) {
   })
 
   useEffect(()=>{
+    document.title = 'Confirmation Records - PMS'
     if(!loaded){
       props.history.push('/');
     } else {

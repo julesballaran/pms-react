@@ -48,6 +48,7 @@ export default function Baptismal(props){
   })
 
   useEffect(()=>{
+    document.title = 'Baptismal Records - PMS'
     if(!loaded){
       props.history.push('/');
     } else {

@@ -47,6 +47,7 @@ function App() {
   }
 
   useEffect(() => {
+    document.title = 'PMS'
     fetchDataAll()
   }, [])
 
