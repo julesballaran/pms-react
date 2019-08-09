@@ -7,7 +7,7 @@ import Routes from './routes'
 import axios from 'axios'
 import Loader from './loader'
 
-const url = 'http://172.60.60.161:9090'
+const url = `http://${window.location.hostname}:9090`
 
 function App() {
   const [loaded, setLoaded] = useState(false)
