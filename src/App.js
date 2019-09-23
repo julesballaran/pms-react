@@ -17,33 +17,18 @@ function App() {
   const [marriage, setMarriage] = useState([])
   const [edited, setEdited] = useState(false)
 
-  const fetchDataAll = () => {
+  const fetchDataAll = async () => {
     setLoaded(false)
-    axios
-      .get(url + '/baptismal')
-      .then(res => setBaptismal(res.data))
-      .finally(fetchConfirmation)
-  }
-
-  const fetchConfirmation = () => {
-    axios
-      .get(url + '/confirmation')
-      .then(res => setConfirmation(res.data))
-      .finally(fetchDeath)
-  }
-
-  const fetchDeath = () => {
-    axios
-      .get(url + '/death')
-      .then(res => setDeath(res.data))
-      .finally(fetchMarriage)
-  }
-
-  const fetchMarriage = () => {
-    axios
-      .get(url + '/marriage')
-      .then(res => setMarriage(res.data))
-      .finally(()=>setLoaded(true))
+    
+    const { data: bap } = await axios.get(url + '/baptismal')
+    setBaptismal(bap)
+    const { data: con } = await axios.get(url + '/confirmation')
+    setConfirmation(con)
+    const { data: dea } = await axios.get(url + '/death')
+    setDeath(dea)
+    const { data: mar } = await axios.get(url + '/marriage')
+    setMarriage(mar)
+    setLoaded(true)
   }
 
   useEffect(() => {
