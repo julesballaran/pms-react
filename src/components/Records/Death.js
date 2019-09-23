@@ -89,6 +89,10 @@ export default function Death(props){
     <React.Fragment>
       <MaterialTable
         title="Death Records"
+        options={{
+          pageSizeOptions: [10, 15, 20],
+          pageSize: 10,
+        }}
         columns={state.columns}
         data={state.data}
         onRowClick={(e, rowData) => {

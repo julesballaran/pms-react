@@ -88,6 +88,10 @@ export default function Marriage(props){
     <React.Fragment>
       <MaterialTable
         title="Marriage Records"
+        options={{
+          pageSizeOptions: [10, 15, 20],
+          pageSize: 10,
+        }}
         columns={state.columns}
         data={state.data}
         onRowClick={(e, rowData) => {
