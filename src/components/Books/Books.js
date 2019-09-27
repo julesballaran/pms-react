@@ -15,6 +15,12 @@ import {
 import Close from '@material-ui/icons/Close'
 import DisplayBooks from './components/DisplayBooks'
 
+import { saveAs } from 'file-saver'
+import baptismalXlsx from '../../data/baptismal-test.xlsx'
+import confirmationXlsx from '../../data/confirmation-test.xlsx'
+import deathXlsx from '../../data/death-test.xlsx'
+import marriageXlsx from '../../data/marriage-test.xlsx'
+
 const useStyles = makeStyles({
   btnStyle: {
     width: 150,
@@ -25,9 +31,10 @@ const useStyles = makeStyles({
     border: '1px solid black',
   },
   addBtn: {
-    width: 100,
+    width: 200,
     fontWeight: 'bolder',
     border: '1px solid black',
+    margin: 10
   }
 })
 
@@ -41,6 +48,7 @@ export default function Books(props){
   const [bookList, setBookList] = useState([])
   const [errAdd, setErrAdd] = useState(false)
   const [type2, setType2] = useState('all')
+  const [temp, setTemp] = useState(false)
   
   useEffect(() => {
     document.title = 'Books - PMS'
@@ -102,13 +110,18 @@ export default function Books(props){
             </Select>
           </FormControl>
         </Grid>
-        <Grid style={{marginLeft: 'auto'}}>
+        <div style={{display: 'flex', flexDirection: 'row', marginLeft: 'auto'}}>
+          <Button 
+            className={classes.btnStyle}
+            onClick={() => setTemp(true)}
+          >Template
+          </Button>
           <Button 
             className={classes.btnStyle}
             onClick={() => setOpen(true)}
           >Add Book
           </Button>
-        </Grid>
+        </div>
       </Grid>
       <DisplayBooks
         type={type2}
@@ -120,6 +133,53 @@ export default function Books(props){
         fetchData={fetchData}
         url={url}
       />
+      <Dialog
+        open={temp}
+        onClose={() => setTemp(false)}
+      >
+        <div style={{background: '#3f51b5', padding: 16}}>
+          <Grid container>
+            <h3 style={{color: 'white', margin: 0}}>Excel Templates</h3>
+            <Close 
+              style={{color: 'white', marginLeft: 'auto', cursor: 'pointer'}}
+              onClick={()=>setTemp(false)}
+            />
+          </Grid>
+        </div>
+        <Grid
+          direction='column'
+          style={{padding: 10}}
+        >
+          <Grid
+            justify='center'
+            alignItems='center'
+          >
+            <Button 
+              className={classes.addBtn}
+              onClick={() => saveAs(baptismalXlsx, 'baptismal-excel-template.xlsx')}
+            >Baptismal</Button>
+            <Button 
+              className={classes.addBtn}
+              onClick={() => saveAs(confirmationXlsx, 'confirmation-excel-template.xlsx')}
+            >Confirmation</Button>
+          </Grid>
+          <Grid
+            justify='center'
+            alignItems='center'
+          >
+            <Button 
+              className={classes.addBtn}
+              onClick={() => saveAs(deathXlsx, 'death-excel-template.xlsx')}
+            >Death</Button>
+            <Button 
+              className={classes.addBtn}
+              onClick={() => saveAs(marriageXlsx, 'marriage-excel-template.xlsx')}
+            >Marriage</Button>
+          </Grid>
+        </Grid>
+      </Dialog>
+
+
       <Dialog 
         open={open}
         onClose={() => setOpen(false)}
